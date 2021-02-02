@@ -14,5 +14,6 @@
 			"js": ["out/content.js"]
 		}
 	],
+	"web_accessible_resources": ["*"],
 	"permissions": ["activeTab", "tabs"]
 }
