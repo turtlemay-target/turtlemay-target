@@ -1,10 +1,11 @@
-import * as React from "react";
-import { AddonBar } from "./AddonBar";
+import { React } from "../web_modules/es-react.js";
+import { AddonBar } from "./AddonBar.js";
 
 export function Application() {
-	const [itemInfo, setItemInfo] = React.useState<IItemInfo | null>(null);
-	
-	let searchInputElem: HTMLInputElement | null = null;
+	const [itemInfo, setItemInfo] = React.useState(null);
+
+	/** @type {HTMLInputElement | null} */
+	let searchInputElem = null;
 
 	React.useEffect(_initSearchInputElem, []);
 	React.useEffect(_initItemInfo, []);
@@ -13,7 +14,7 @@ export function Application() {
 	React.useEffect(_initFocusSearchInputKeyListener, []);
 
 	if (itemInfo) {
-		return <AddonBar itemInfo={itemInfo} />;
+		return React.createElement(AddonBar, { itemInfo });
 	} else {
 		return null;
 	}
@@ -28,7 +29,8 @@ export function Application() {
 
 	function _initMutationObserver() {
 		const observer = new MutationObserver((mutations) => {
-			let foundItemInfo: IItemInfo = {};
+			/** @type {IItemInfo} */
+			let foundItemInfo = {};
 			mutations.forEach((mutation) => {
 				searchInputElem =
 					searchInputElem ?? document.querySelector("input#search");
@@ -66,7 +68,7 @@ export function Application() {
 	function _initFocusSearchInputKeyListener() {
 		addEventListener("keydown", _listener);
 		return () => removeEventListener("keydown", _listener);
-		function _listener(event: KeyboardEvent) {
+		function _listener(event) {
 			if (
 				searchInputElem &&
 				document.activeElement?.nodeName !== "INPUT" &&
@@ -78,20 +80,37 @@ export function Application() {
 	}
 }
 
-function matchUPC(str: string | null): string | null {
+/**
+ * @param {string | null} str
+ * @returns {string | null}
+ */
+function matchUPC(str) {
 	return str?.match(/UPC:\ (\d{12,13})/)?.[1] || null;
 }
 
-function matchDPCI(str: string | null): string | null {
+/**
+ * @param {string | null} str
+ * @returns {string | null}
+ */
+function matchDPCI(str) {
 	return str?.match(/\(?DPCI\)?:\ (\d+-\d+-\d+)/)?.[1] || null;
 }
 
-function matchTCIN(str: string | null): string | null {
+/**
+ * @param {string | null} str
+ * @returns {string | null}
+ */
+function matchTCIN(str) {
 	return str?.match(/TCIN:\ (\d{8})/)?.[1] || null;
 }
 
-function extractItemInfo(str: string | null): IItemInfo | null {
-	const foundItemInfo: IItemInfo = {
+/**
+ * @param {string | null} str
+ * @returns {IItemInfo | null}
+ */
+function extractItemInfo(str) {
+	/** @type {IItemInfo} */
+	const foundItemInfo = {
 		upc: matchUPC(str),
 		dpci: matchDPCI(str),
 		tcin: matchTCIN(str),
