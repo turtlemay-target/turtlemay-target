@@ -8,4 +8,6 @@ Download [latest release](https://github.com/turtlemay-target/turtlemay-target/r
 
 ## Screenshot
 
+![](/capture.gif)
+
 ![screenshot](/screenshot.png)
