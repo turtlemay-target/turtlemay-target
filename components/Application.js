@@ -7,6 +7,7 @@ export function Application() {
 	/** @type {HTMLInputElement | null} */
 	let searchInputElem = null;
 
+	React.useEffect(_initExpandDetails, []);
 	React.useEffect(_initSearchInputElem, []);
 	React.useEffect(_initItemInfo, []);
 	React.useEffect(_initMutationObserver, []);
@@ -17,6 +18,14 @@ export function Application() {
 		return React.createElement(AddonBar, { itemInfo });
 	} else {
 		return null;
+	}
+
+	function _initExpandDetails() {
+		const clickElem = document.querySelector(
+			'[data-test="pdpBottomOfTheFoldContent"] button[data-test="toggleContentButton"]'
+		);
+		if (clickElem instanceof HTMLElement && clickElem?.textContent === "Show more")
+			clickElem.click();
 	}
 
 	function _initSearchInputElem() {
