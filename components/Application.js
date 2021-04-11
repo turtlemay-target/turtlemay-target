@@ -51,6 +51,17 @@ export function Application() {
 					foundItemInfo.tcin =
 						foundItemInfo.tcin || matchTCIN(addedNode.textContent);
 				});
+				if (
+					mutation.type === "attributes" &&
+					mutation.attributeName === "aria-label" &&
+					mutation.target instanceof HTMLElement &&
+					mutation.target
+						.getAttribute("aria-label")
+						?.includes("checked")
+				) {
+					setItemInfo(extractItemInfo(document.body.textContent));
+					return;
+				}
 			});
 			if (foundItemInfo.upc || foundItemInfo.dpci || foundItemInfo.tcin) {
 				setItemInfo(foundItemInfo);
@@ -59,7 +70,7 @@ export function Application() {
 		observer.observe(document.body, {
 			childList: true,
 			subtree: true,
-			attributes: false,
+			attributes: true,
 			characterData: true,
 		});
 		return () => observer.disconnect();
