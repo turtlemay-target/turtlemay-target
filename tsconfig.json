@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"outDir": "out",
+		"allowJs": true,
+		"target": "ES2018",
+		"jsx": "react",
+		"strictFunctionTypes": true,
+		"strictNullChecks": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true
+	},
+	"exclude": ["node_modules"]
+}

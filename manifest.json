@@ -4,13 +4,14 @@
 	"description": "Extension for Target.com",
 	"manifest_version": 2,
 	"background": {
-		"scripts": ["src/background.js"],
+		"scripts": ["out/background.js"],
 		"persistent": false
 	},
 	"content_scripts": [
 		{
 			"matches": ["https://*.target.com/*"],
-			"js": ["src/content.js"]
+			"css": ["css/style.css"],
+			"js": ["out/content.js"]
 		}
 	],
 	"web_accessible_resources": ["*"],
