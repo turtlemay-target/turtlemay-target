@@ -21,6 +21,6 @@ module.exports = {
 		path: path.resolve(__dirname, "out"),
 		filename: "[name].js",
 	},
-	mode: "development",
+	mode: "production",
 	devtool: "inline-source-map",
 };
