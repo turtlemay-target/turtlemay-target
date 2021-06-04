@@ -26,6 +26,7 @@ export function Barcode(props: { className?: string; itemInfo: IItemInfo }) {
 				margin: 5,
 				displayValue: true,
 				fontSize: 15,
+				background: "transparent",
 			});
 		}
 	});
