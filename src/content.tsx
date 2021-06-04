@@ -4,6 +4,7 @@ import { BarcodeWidget } from "../components/BarcodeWidget";
 import { waitForElement } from "../lib/util";
 
 import "./search";
+import "./remove-ads";
 
 const barcodeWidgetRootElem = document.createElement("div");
 barcodeWidgetRootElem.className = "turtlemay__barcodeWidgetRoot";
