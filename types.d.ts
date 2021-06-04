@@ -1,5 +1,3 @@
-declare const JsBarcode;
-
 declare interface IItemInfo {
 	name?: string | null;
 	upc?: string | null;
