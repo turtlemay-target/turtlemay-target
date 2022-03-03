@@ -11,7 +11,7 @@ import "../css/style.css";
 const barcodeWidgetRootElem = document.createElement("div");
 barcodeWidgetRootElem.className = "turtlemay__barcodeWidgetRoot";
 
-waitForElement("#product-details-tabs").then((el) => {
+waitForElement("#product-detail-tabs").then((el) => {
 	render(processItemInfo(el.textContent));
 });
 
@@ -27,7 +27,7 @@ const observer = new MutationObserver((mutations) => {
 			return;
 		}
 		if (mutation.target instanceof HTMLElement) {
-			if (mutation.target.querySelector("#product-details-tabs")) {
+			if (mutation.target.querySelector("#product-detail-tabs")) {
 				render(processItemInfo(mutation.target.textContent));
 				return;
 			}
