@@ -1,5 +1,6 @@
 {
 	"private": true,
+	"name": "turtlemay-target",
 	"scripts": {
 		"start": "webpack -w",
 		"build": "foy build"
