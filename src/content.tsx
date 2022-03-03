@@ -6,6 +6,8 @@ import { waitForElement } from "../lib/util";
 import "./search";
 import "./remove-ads";
 
+import "../css/style.css";
+
 const barcodeWidgetRootElem = document.createElement("div");
 barcodeWidgetRootElem.className = "turtlemay__barcodeWidgetRoot";
 
