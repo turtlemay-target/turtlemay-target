@@ -3,10 +3,6 @@
 	"version": "0.2.0",
 	"description": "Extension for Target.com",
 	"manifest_version": 2,
-	"background": {
-		"scripts": ["out/background.js"],
-		"persistent": false
-	},
 	"content_scripts": [
 		{
 			"matches": ["https://*.target.com/*"],
