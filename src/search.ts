@@ -5,14 +5,30 @@
 addEventListener("keydown", handleKeyDown);
 
 function handleKeyDown(event: KeyboardEvent) {
+	const RESET_KEY = "`";
+
 	const elem: HTMLInputElement | null =
 		document.querySelector("input#search");
 
-	if (
-		elem &&
-		document.activeElement?.nodeName !== "INPUT" &&
-		event.key.match(/^([a-zA-Z])$/)?.[1]
-	) {
+	if (!elem) {
+		return;
+	}
+
+	if (event.key === RESET_KEY) {
+		event.preventDefault();
 		elem.focus();
+		elem.value = "";
+	}
+
+	// Focus input if not focused.
+	if (document.activeElement?.nodeName !== "INPUT") {
+		if (event.key === "Enter") {
+			event.preventDefault();
+			elem.focus();
+			elem.value = "";
+		}
+		else if (event.key.match(/^([a-zA-Z])$/)?.[1] && !event.ctrlKey && !event.altKey) {
+			elem.focus();
+		}
 	}
 }
