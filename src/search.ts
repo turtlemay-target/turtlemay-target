@@ -1,3 +1,7 @@
+/**
+ * @file Select and clear input field.
+ */
+
 addEventListener("keydown", handleKeyDown);
 
 function handleKeyDown(event: KeyboardEvent) {
