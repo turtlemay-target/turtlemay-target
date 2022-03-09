@@ -43,7 +43,7 @@ module.exports = [{
 					namespace: "us.turtlemay.target",
 					description: manifestJson.description,
 					version: manifestJson.version,
-					include: "https://target.com/*",
+					include: "https://*.target.com/*",
 				},
 			}],
 		}),
