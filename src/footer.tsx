@@ -6,14 +6,33 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import packageJson from "../package.json";
 import manifestJson from "../manifest.json";
-import { waitForElement } from "../lib/util";
 
-waitForElement('div[data-test="@web/component-footer/SubFooter"] a[data-test="@web/component-footer/LegalLink"]:last-of-type').then(el => {
-	const myEl = document.createElement("p");
-	myEl.classList.add("h-text-white");
-	myEl.classList.add("h-padding-r-tight");
+const FOOTER_SEL = (
+	'div[data-test="@web/component-footer/SubFooter"] ' +
+	'a[data-test="@web/component-footer/LegalLink"]:last-of-type'
+);
 
-	el.insertAdjacentElement("afterend", myEl);
+const myEl = document.createElement("p");
+myEl.className = "h-text-white h-padding-r-tight";
+
+render(document.querySelector(FOOTER_SEL));
+
+new MutationObserver((mutations, observer) => {
+	if (!document.body.contains(myEl)) {
+		render(document.querySelector(FOOTER_SEL));
+	}
+	observer.takeRecords();
+}).observe(document.body, {
+	childList: true,
+	subtree: true,
+});
+
+async function render(elem?: Element | null) {
+	if (!elem) {
+		return;
+	}
+
+	elem.insertAdjacentElement("afterend", myEl);
 
 	ReactDOM.render(
 		<span className="turtlemay__footerText">
@@ -24,4 +43,4 @@ waitForElement('div[data-test="@web/component-footer/SubFooter"] a[data-test="@w
 		</span>,
 		myEl
 	);
-});
+}
