@@ -8,6 +8,7 @@ export function waitForElement(selector: string): Promise<Element> {
 			for (const v of document.querySelectorAll(selector)) {
 				resolve(v);
 				observer.disconnect();
+				break;
 			}
 		}).observe(document.documentElement, {
 			childList: true,
