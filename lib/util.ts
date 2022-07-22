@@ -6,10 +6,10 @@ export function waitForElement(selector: string): Promise<Element> {
 			return;
 		}
 		new MutationObserver((mutationRecords, observer) => {
-			for (const v of document.querySelectorAll(selector)) {
-				resolve(v);
+			const elem = document.querySelector(selector);
+			if (elem) {
+				resolve(elem);
 				observer.disconnect();
-				break;
 			}
 		}).observe(document.documentElement, {
 			childList: true,
