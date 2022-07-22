@@ -1,4 +1,5 @@
 import "./barcode";
 import "./search";
+import "./pickresult";
 
 import "../css/style.css";
