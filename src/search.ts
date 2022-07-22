@@ -2,7 +2,9 @@
  * @file Select and clear input field.
  */
 
-addEventListener("keydown", (event: KeyboardEvent) => {
+addEventListener("keydown", onKeyDown);
+
+function onKeyDown(event: KeyboardEvent) {
 	const RESET_KEY = "`";
 
 	const elem: HTMLInputElement | null =
@@ -29,4 +31,4 @@ addEventListener("keydown", (event: KeyboardEvent) => {
 			elem.focus();
 		}
 	}
-});
+}
