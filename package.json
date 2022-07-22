@@ -1,6 +1,7 @@
 {
 	"private": true,
 	"name": "turtlemay-target",
+	"repository": "https://github.com/turtlemay-target/turtlemay-target",
 	"scripts": {
 		"start": "webpack -w",
 		"build": "foy build"
