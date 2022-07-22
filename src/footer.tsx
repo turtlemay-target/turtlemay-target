@@ -8,12 +8,12 @@ import packageJson from "../package.json";
 import manifestJson from "../manifest.json";
 import { waitForElement } from "../lib/util";
 
-waitForElement('div[data-test="@web/component-footer/SubFooter"] p[data-test="@web/component-footer/PrivacyDate"]').then(el => {
+waitForElement('div[data-test="@web/component-footer/SubFooter"] a[data-test="@web/component-footer/LegalLink"]:last-of-type').then(el => {
 	const myEl = document.createElement("p");
 	myEl.classList.add("h-text-white");
 	myEl.classList.add("h-padding-r-tight");
 
-	el.insertAdjacentElement("beforebegin", myEl);
+	el.insertAdjacentElement("afterend", myEl);
 
 	ReactDOM.render(
 		<span className="turtlemay__footerText">
