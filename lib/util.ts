@@ -5,10 +5,10 @@ export function waitForElement(selector: string): Promise<Element> {
 			resolve(elem);
 		}
 		new MutationObserver((mutationRecords, observer) => {
-			Array.from(document.querySelectorAll(selector)).forEach((v) => {
+			for (const v of document.querySelectorAll(selector)) {
 				resolve(v);
 				observer.disconnect();
-			});
+			}
 		}).observe(document.documentElement, {
 			childList: true,
 			subtree: true,
