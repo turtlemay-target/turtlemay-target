@@ -2,9 +2,8 @@
  * @file Use number keys to select search result.
  */
 
-const numberTest = /^[0-9]$/i;
-
 addEventListener("keydown", (event: KeyboardEvent) => {
+	const numberTest = /^[0-9]$/i;
 	const locationCheck = (
 		location.search.startsWith("?searchTerm=") ||
 		location.pathname.startsWith("/c/") ||
