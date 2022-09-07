@@ -1,6 +1,10 @@
-export function querySelectorFirst<T extends Element>(selectors: string[]): T | null {
+/** Check for elements in order and get the first one found. */
+export function querySelectorFirst<T extends Element>(
+	obj: Pick<T, "querySelector">,
+	selectors: string[],
+): T | null {
 	for (const s of selectors) {
-		const el = document.querySelector<T>(s);
+		const el = obj.querySelector<T>(s);
 		if (el) {
 			return el;
 		}
