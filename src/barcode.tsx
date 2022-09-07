@@ -42,7 +42,7 @@ const observer = new MutationObserver((mutations) => {
 });
 
 async function render(itemInfo: IItemInfo | null) {
-	const v = await waitForElement(`[data-test="product-title", h1`);
+	const v = await waitForElement(`[data-test="product-title"], h1`);
 	v.insertAdjacentElement("afterend", barcodeWidgetRootElem);
 	ReactDOM.render(
 		<BarcodeWidget itemInfo={itemInfo} />,
