@@ -2,6 +2,8 @@
  * @file Select and clear input field.
  */
 
+import { querySelectorFirst } from "../lib/util";
+
 const searchInputSelectors = [
 	`input[data-test="@web/SearchInputOverlayMobile"]`,
 	"input#search",
@@ -14,32 +16,42 @@ const searchInputSelectors = [
 
 addEventListener("keydown", onKeyDown);
 
-let inputEl: HTMLInputElement | null;
-
 function onKeyDown(event: KeyboardEvent) {
 	const RESET_KEY = "`";
 
-	inputEl = document.querySelector(searchInputSelectors.join(", "));
-
-	if (!inputEl) {
-		return;
-	}
-
 	if (event.key === RESET_KEY) {
 		event.preventDefault();
+		openMobileSearchModal();
+		const inputEl = querySelectorFirst<HTMLInputElement>(searchInputSelectors);
+		if (!inputEl) return;
 		inputEl.focus();
 		inputEl.value = "";
 	}
 
-	// Focus input if not focused.
 	if (document.activeElement?.nodeName !== "INPUT") {
 		if (event.key === "Enter") {
 			event.preventDefault();
+			openMobileSearchModal();
+			const inputEl = querySelectorFirst<HTMLInputElement>(searchInputSelectors);
+			if (!inputEl) return;
 			inputEl.focus();
 			inputEl.value = "";
 		}
 		else if (event.key.match(/^([a-zA-Z])$/)?.[1] && !event.ctrlKey && !event.altKey) {
+			openMobileSearchModal();
+			const inputEl = querySelectorFirst<HTMLInputElement>(searchInputSelectors);
+			if (!inputEl) return;
 			inputEl.focus();
 		}
+	}
+}
+
+function openMobileSearchModal() {
+	if (!document.body.classList.contains("ReactModal__Body--open")) {
+		const clickEl = querySelectorFirst<HTMLElement>([
+			`input[data-test="@web/SearchInputMobile"]`,
+			`input[readonly]`,
+		]);
+		clickEl?.click();
 	}
 }
