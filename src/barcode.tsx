@@ -11,7 +11,7 @@ const barcodeWidgetRootElem = document.createElement("div");
 barcodeWidgetRootElem.className = "turtlemay__barcodeWidgetRoot";
 
 waitForElement("#product-detail-tabs").then((el) => {
-	render(processItemInfo(el.textContent));
+	render(extractItemInfo(el.textContent));
 });
 
 const observer = new MutationObserver((mutations) => {
@@ -23,13 +23,13 @@ const observer = new MutationObserver((mutations) => {
 			mutation.target instanceof HTMLElement &&
 			mutation.target.getAttribute("aria-label")?.includes("pressed")
 		) {
-			render(processItemInfo(document.body.textContent));
+			render(extractItemInfo(document.body.textContent));
 			return;
 		}
 
 		if (mutation.target instanceof HTMLElement) {
 			if (mutation.target.querySelector("#product-detail-tabs")) {
-				render(processItemInfo(mutation.target.textContent));
+				render(extractItemInfo(mutation.target.textContent));
 				return;
 			}
 		}
@@ -50,7 +50,7 @@ async function render(itemInfo: IItemInfo | null) {
 	);
 }
 
-function processItemInfo(str: string | null): IItemInfo | null {
+function extractItemInfo(str: string | null): IItemInfo | null {
 	const foundItemInfo: IItemInfo = {
 		upc: matchUPC(str),
 		dpci: matchDPCI(str),
