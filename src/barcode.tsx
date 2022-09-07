@@ -7,10 +7,18 @@ import * as ReactDOM from "react-dom";
 import { BarcodeWidget } from "../components/BarcodeWidget";
 import { waitForElement } from "../lib/util";
 
+const productDetailRootSelectors = [
+	"#product-detail-tabs",
+	"#tabContent-tab-Details",
+	"#specAndDescript",
+	`[data-test="detailsTab"]`,
+	`[data-test="item-details-specifications"]`,
+];
+
 const barcodeWidgetRootElem = document.createElement("div");
 barcodeWidgetRootElem.className = "turtlemay__barcodeWidgetRoot";
 
-waitForElement("#product-detail-tabs").then((el) => {
+waitForElement(productDetailRootSelectors.join(", ")).then((el) => {
 	render(extractItemInfo(el.textContent));
 });
 
@@ -28,7 +36,7 @@ const observer = new MutationObserver((mutations) => {
 		}
 
 		if (mutation.target instanceof HTMLElement) {
-			if (mutation.target.querySelector("#product-detail-tabs")) {
+			if (mutation.target.querySelector(productDetailRootSelectors.join(", "))) {
 				render(extractItemInfo(mutation.target.textContent));
 				return;
 			}
