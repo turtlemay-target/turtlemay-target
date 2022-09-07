@@ -16,6 +16,7 @@ waitForElement("#product-detail-tabs").then((el) => {
 
 const observer = new MutationObserver((mutations) => {
 	mutations.forEach((mutation) => {
+		// Detect selected item variation.
 		if (
 			mutation.type === "attributes" &&
 			mutation.attributeName === "aria-label" &&
@@ -25,6 +26,7 @@ const observer = new MutationObserver((mutations) => {
 			render(processItemInfo(document.body.textContent));
 			return;
 		}
+
 		if (mutation.target instanceof HTMLElement) {
 			if (mutation.target.querySelector("#product-detail-tabs")) {
 				render(processItemInfo(mutation.target.textContent));
