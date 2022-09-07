@@ -20,7 +20,7 @@ const observer = new MutationObserver((mutations) => {
 			mutation.type === "attributes" &&
 			mutation.attributeName === "aria-label" &&
 			mutation.target instanceof HTMLElement &&
-			mutation.target.getAttribute("aria-label")?.includes("checked")
+			mutation.target.getAttribute("aria-label")?.includes("pressed")
 		) {
 			render(processItemInfo(document.body.textContent));
 			return;
