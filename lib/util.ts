@@ -1,3 +1,13 @@
+export function querySelectorFirst<T extends Element>(selectors: string[]): T | null {
+	for (const s of selectors) {
+		const el = document.querySelector<T>(s);
+		if (el) {
+			return el;
+		}
+	}
+	return null;
+}
+
 export function waitForElement(selector: string): Promise<Element> {
 	return new Promise((resolve, reject) => {
 		let elem = document.querySelector(selector);
