@@ -43,6 +43,7 @@ module.exports = [{
 					namespace: "us.turtlemay.target",
 					description: manifestJson.description,
 					author: manifestJson.author,
+					icon: "https://www.google.com/s2/favicons?sz=64&domain=target.com",
 					version: manifestJson.version,
 					include: "https://*.target.com/*",
 				},
