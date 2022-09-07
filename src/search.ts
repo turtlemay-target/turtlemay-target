@@ -2,6 +2,16 @@
  * @file Select and clear input field.
  */
 
+const searchInputSelectors = [
+	`input[data-test="@web/SearchInputOverlayMobile"]`,
+	"input#search",
+	"#headerPrimary input",
+	"#searchForm input",
+	"nav input",
+	".search-input-form input",
+	`input[type="search"]`,
+];
+
 addEventListener("keydown", onKeyDown);
 
 let inputEl: HTMLInputElement | null;
@@ -9,7 +19,7 @@ let inputEl: HTMLInputElement | null;
 function onKeyDown(event: KeyboardEvent) {
 	const RESET_KEY = "`";
 
-	inputEl ??= document.querySelector("input#search");
+	inputEl = document.querySelector(searchInputSelectors.join(", "));
 
 	if (!inputEl) {
 		return;
