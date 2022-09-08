@@ -1,3 +1,4 @@
+import "./welcome";
 import "./footer";
 import "./barcode";
 import "./search";
