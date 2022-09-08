@@ -40,7 +40,8 @@ async function render(elem?: Element | null) {
 		<span className="turtlemay__footerText">
 			<a className="Link__StyledLink-sc-4b9qcv-0 ghasId" href={packageJson.repository} target="_blank">
 				<span className="turtlemay__footerTextIcon">🧩</span>
-				{manifestJson.name}
+				<span>&nbsp;</span>
+				<span>{manifestJson.name}</span>
 			</a>
 			<span>&nbsp;</span>
 			<span className="turtlemay__footerTextVersion">{manifestJson.version}</span>
