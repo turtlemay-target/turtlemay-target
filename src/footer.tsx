@@ -7,7 +7,7 @@ import { createRoot } from "react-dom/client";
 import packageJson from "../package.json";
 import manifestJson from "../manifest.json";
 
-const FOOTER_SEL = (
+const footerAdjacentElemSelector = (
 	'div[data-test="@web/component-footer/SubFooter"] ' +
 	'a[data-test="@web/component-footer/LegalLink"]:last-of-type'
 );
@@ -17,11 +17,11 @@ myEl.className = "h-text-white h-padding-r-tight";
 
 const reactRoot = createRoot(myEl);
 
-render(document.querySelector(FOOTER_SEL));
+render(document.querySelector(footerAdjacentElemSelector));
 
 new MutationObserver((mutations, observer) => {
 	if (!document.body.contains(myEl)) {
-		render(document.querySelector(FOOTER_SEL));
+		render(document.querySelector(footerAdjacentElemSelector));
 	}
 	observer.takeRecords();
 }).observe(document.body, {
@@ -29,12 +29,12 @@ new MutationObserver((mutations, observer) => {
 	subtree: true,
 });
 
-async function render(elem?: Element | null) {
-	if (!elem) {
+async function render(adjacentElem?: Element | null) {
+	if (!adjacentElem) {
 		return;
 	}
 
-	elem.insertAdjacentElement("afterend", myEl);
+	adjacentElem.insertAdjacentElement("afterend", myEl);
 
 	reactRoot.render(
 		<span className="turtlemay__footerText">
