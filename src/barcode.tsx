@@ -5,24 +5,18 @@
 import * as React from "react";
 import { createRoot } from "react-dom/client";
 import { BarcodeWidget } from "../components/BarcodeWidget";
-import { waitForElement } from "../lib/util";
-
-const productDetailRootSelectors = [
-	"#product-detail-tabs",
-	"#tabContent-tab-Details",
-	"#specAndDescript",
-	`[data-test="detailsTab"]`,
-	`[data-test="item-details-specifications"]`,
-];
 
 const barcodeWidgetRootElem = document.createElement("div");
 barcodeWidgetRootElem.className = "turtlemay__barcodeWidgetRoot";
 
 const reactRoot = createRoot(barcodeWidgetRootElem);
+reactRoot.render(React.createElement(BarcodeApplication));
+
+insertBarcodeApplication();
 
 const observer = new MutationObserver((mutations) => {
 	if (!document.body.contains(barcodeWidgetRootElem)) {
-		render();
+		insertBarcodeApplication();
 	}
 });
 
@@ -31,13 +25,9 @@ observer.observe(document.body, {
 	subtree: true,
 });
 
-render();
-
-async function render() {
-	const adjacentEl = await waitForElement(`[data-test="product-title"], h1`);
-	adjacentEl.insertAdjacentElement("afterend", barcodeWidgetRootElem);
-	await waitForElement(productDetailRootSelectors.join(", "));
-	reactRoot.render(React.createElement(BarcodeApplication));
+async function insertBarcodeApplication() {
+	const adjacentEl = document.querySelector(`[data-test="product-title"], h1`);
+	adjacentEl?.insertAdjacentElement("afterend", barcodeWidgetRootElem);
 }
 
 function BarcodeApplication() {
@@ -71,6 +61,13 @@ function BarcodeApplication() {
 
 				// Detect changed product details.
 				if (mutation.target instanceof HTMLElement) {
+					const productDetailRootSelectors = [
+						"#product-detail-tabs",
+						"#tabContent-tab-Details",
+						"#specAndDescript",
+						`[data-test="detailsTab"]`,
+						`[data-test="item-details-specifications"]`,
+					];
 					if (mutation.target.querySelector(productDetailRootSelectors.join(", "))) {
 						setItemInfo(extractItemInfo(mutation.target.textContent));
 						break;
