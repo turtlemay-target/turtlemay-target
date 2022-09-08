@@ -20,41 +20,78 @@ barcodeWidgetRootElem.className = "turtlemay__barcodeWidgetRoot";
 
 const reactRoot = createRoot(barcodeWidgetRootElem);
 
-waitForElement(productDetailRootSelectors.join(", ")).then((el) => {
-	render(extractItemInfo(el.textContent));
+const observer = new MutationObserver((mutations) => {
+	if (!document.body.contains(barcodeWidgetRootElem)) {
+		render();
+	}
 });
 
-const observer = new MutationObserver((mutations) => {
-	mutations.forEach((mutation) => {
-		// Detect selected item variation.
-		if (
-			mutation.type === "attributes" &&
-			mutation.attributeName === "aria-label" &&
-			mutation.target instanceof HTMLElement &&
-			mutation.target.getAttribute("aria-label")?.includes("pressed")
-		) {
-			render(extractItemInfo(document.body.textContent));
-			return;
-		}
-
-		if (mutation.target instanceof HTMLElement) {
-			if (mutation.target.querySelector(productDetailRootSelectors.join(", "))) {
-				render(extractItemInfo(mutation.target.textContent));
-				return;
-			}
-		}
-	});
-}).observe(document.body, {
+observer.observe(document.body, {
 	childList: true,
 	subtree: true,
-	attributes: true,
-	characterData: true,
 });
 
-async function render(itemInfo: IItemInfo | null) {
-	const v = await waitForElement(`[data-test="product-title"], h1`);
-	v.insertAdjacentElement("afterend", barcodeWidgetRootElem);
-	reactRoot.render(<BarcodeWidget itemInfo={itemInfo} />);
+render();
+
+async function render() {
+	const adjacentEl = await waitForElement(`[data-test="product-title"], h1`);
+	adjacentEl.insertAdjacentElement("afterend", barcodeWidgetRootElem);
+	await waitForElement(productDetailRootSelectors.join(", "));
+	reactRoot.render(React.createElement(BarcodeApplication));
+}
+
+function BarcodeApplication() {
+	const [itemInfo, setItemInfo] = React.useState(extractItemInfo(document.body.textContent));
+	const prevLocation = React.useRef(location.href);
+
+	React.useEffect(initObserver, []);
+	React.useEffect(update, [location.href]);
+
+	return <BarcodeWidget itemInfo={itemInfo} />;
+
+	function initObserver() {
+		const observer = new MutationObserver((mutations) => {
+			// Detect changed location.
+			if (location.href !== prevLocation.current) {
+				prevLocation.current = location.href;
+				setItemInfo(extractItemInfo(document.body.textContent));
+			}
+
+			for (const mutation of mutations) {
+				// Detect selected item variation.
+				if (
+					mutation.type === "attributes" &&
+					mutation.attributeName === "aria-label" &&
+					mutation.target instanceof HTMLElement &&
+					mutation.target.getAttribute("aria-label")?.includes("pressed")
+				) {
+					setItemInfo(extractItemInfo(document.body.textContent));
+					break;
+				}
+
+				// Detect changed product details.
+				if (mutation.target instanceof HTMLElement) {
+					if (mutation.target.querySelector(productDetailRootSelectors.join(", "))) {
+						setItemInfo(extractItemInfo(mutation.target.textContent));
+						break;
+					}
+				}
+			}
+		});
+
+		observer.observe(document.body, {
+			childList: true,
+			subtree: true,
+			attributes: true,
+			characterData: true,
+		});
+
+		return () => observer.disconnect();
+	}
+
+	function update() {
+		setItemInfo(extractItemInfo(document.body.textContent));
+	}
 }
 
 function extractItemInfo(str: string | null): IItemInfo | null {
