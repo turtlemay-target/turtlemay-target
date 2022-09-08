@@ -1,6 +1,8 @@
 # Turtlemay's Target Extension
 
-This browser extension automatically adds a barcode to product pages on [Target.com](https://target.com). Generates UPC when available, falling back to DPCI/TCIN in Code 128 format. Supports items with variations (color, size, etc).
+This browser extension automatically adds a barcode to product pages on [Target.com](https://target.com). Generates UPC when available, falling back to DPCI/TCIN in Code 128 format. Supports items with variations (color, size, count, etc).
+
+Use number keys on search page to quick select a result. Backtick, Enter, and letter keys automatically focus the search field.
 
 ## Installation
 
