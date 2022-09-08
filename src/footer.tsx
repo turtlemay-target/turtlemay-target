@@ -17,18 +17,18 @@ myEl.className = "h-text-white h-padding-r-tight";
 
 const reactRoot = createRoot(myEl);
 
-render(document.querySelector(footerAdjacentElemSelector));
+render();
 
 new MutationObserver((mutations, observer) => {
 	if (!document.body.contains(myEl)) {
-		render(document.querySelector(footerAdjacentElemSelector));
+		render();
 	}
 }).observe(document.body, {
 	childList: true,
 	subtree: true,
 });
 
-async function render(adjacentElem?: Element | null) {
+async function render(adjacentElem = document.querySelector(footerAdjacentElemSelector)) {
 	if (!adjacentElem) {
 		return;
 	}
