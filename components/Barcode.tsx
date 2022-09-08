@@ -4,7 +4,13 @@ import JsBarcode from "jsbarcode";
 export function Barcode(props: { className?: string; itemInfo: IItemInfo }) {
 	const elemRef = React.createRef<HTMLCanvasElement>();
 
-	React.useEffect(function _update() {
+	React.useEffect(update, [
+		props.itemInfo.upc,
+		props.itemInfo.dpci,
+		props.itemInfo.tcin,
+	]);
+
+	function update() {
 		let format = "code128";
 		let value: string | undefined;
 
@@ -29,7 +35,7 @@ export function Barcode(props: { className?: string; itemInfo: IItemInfo }) {
 				background: "transparent",
 			});
 		}
-	});
+	}
 
 	return React.createElement("canvas", {
 		className: `${props.className} turtlemay__enterAnimation`,
