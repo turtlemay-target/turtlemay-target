@@ -32,7 +32,8 @@ export function Barcode(props: { className?: string; itemInfo: IItemInfo }) {
 	});
 
 	return React.createElement("canvas", {
-		className: props.className,
+		className: `${props.className} turtlemay__enterAnimation`,
+		key: props.itemInfo.upc ?? props.itemInfo.dpci ?? props.itemInfo.tcin,
 		ref: elemRef,
 	});
 }
