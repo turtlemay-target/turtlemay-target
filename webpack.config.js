@@ -7,7 +7,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 module.exports = [{
 	name: "extension",
 	entry: {
-		content: "./src/content.tsx",
+		content: "./src/content.ts",
 	},
 	module: {
 		rules: [
@@ -33,7 +33,7 @@ module.exports = [{
 	devtool: "inline-source-map",
 }, {
 	name: "userscript",
-	entry: "./src/content.tsx",
+	entry: "./src/content.ts",
 	plugins: [
 		new TinyWebpackUserscriptPlugin({
 			scriptName: `${packageJson.name}-${manifestJson.version}`,
