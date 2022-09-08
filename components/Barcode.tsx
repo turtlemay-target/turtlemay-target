@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as JsBarcode from "jsbarcode";
+import JsBarcode from "jsbarcode";
 
 export function Barcode(props: { className?: string; itemInfo: IItemInfo }) {
 	const elemRef = React.createRef<HTMLCanvasElement>();
