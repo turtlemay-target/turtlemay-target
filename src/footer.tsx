@@ -7,7 +7,7 @@ import packageJson from "../package.json";
 import manifestJson from "../manifest.json";
 
 const elem = (
-	<p className="turtlemay__footerText h-text-white h-padding-r-tight">
+	<p className="turtlemay__footerText h-padding-r-tight">
 		<a className="Link__StyledLink-sc-4b9qcv-0 ghasId" href={packageJson.repository} target="_blank">
 			<span className="turtlemay__footerTextIcon">🧩</span>
 			<span>&nbsp;</span>
