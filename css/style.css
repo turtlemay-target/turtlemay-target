@@ -18,3 +18,16 @@
 .turtlemay__footerTextVersion {
 	color: rgb(255, 203, 190);
 }
+
+.turtlemay__enterAnimation {
+	transition-property: all;
+	animation-name: turtlemay-enter-animation;
+	animation-duration: 300ms;
+}
+
+@keyframes turtlemay-enter-animation {
+	from {
+		transform: scale(1.2);
+		opacity: 0;
+	}
+}

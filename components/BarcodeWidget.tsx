@@ -2,9 +2,10 @@ import * as React from "react";
 import { Barcode } from "./Barcode";
 
 export function BarcodeWidget(props: { itemInfo: IItemInfo | null }) {
+	const key = props.itemInfo?.upc ?? props.itemInfo?.dpci ?? props.itemInfo?.tcin;
 	return (
 		props.itemInfo && (
-			<div className="turtlemay__barcodeWidget">
+			<div className="turtlemay__barcodeWidget turtlemay__enterAnimation" key={key}>
 				<Barcode itemInfo={props.itemInfo} />
 			</div>
 		)
