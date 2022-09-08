@@ -3,7 +3,7 @@
  */
 
 import * as React from "react";
-import * as ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import packageJson from "../package.json";
 import manifestJson from "../manifest.json";
 
@@ -14,6 +14,8 @@ const FOOTER_SEL = (
 
 const myEl = document.createElement("p");
 myEl.className = "h-text-white h-padding-r-tight";
+
+const reactRoot = createRoot(myEl);
 
 render(document.querySelector(FOOTER_SEL));
 
@@ -34,13 +36,12 @@ async function render(elem?: Element | null) {
 
 	elem.insertAdjacentElement("afterend", myEl);
 
-	ReactDOM.render(
+	reactRoot.render(
 		<span className="turtlemay__footerText">
 			<a className="Link__StyledLink-sc-4b9qcv-0 ghasId" href={packageJson.repository} target="_blank">
 				{manifestJson.name}
 			</a>
 			&nbsp;{manifestJson.version}
-		</span>,
-		myEl
+		</span>
 	);
 }

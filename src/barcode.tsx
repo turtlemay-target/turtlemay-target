@@ -3,7 +3,7 @@
  */
 
 import * as React from "react";
-import * as ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { BarcodeWidget } from "../components/BarcodeWidget";
 import { waitForElement } from "../lib/util";
 
@@ -17,6 +17,8 @@ const productDetailRootSelectors = [
 
 const barcodeWidgetRootElem = document.createElement("div");
 barcodeWidgetRootElem.className = "turtlemay__barcodeWidgetRoot";
+
+const reactRoot = createRoot(barcodeWidgetRootElem);
 
 waitForElement(productDetailRootSelectors.join(", ")).then((el) => {
 	render(extractItemInfo(el.textContent));
@@ -52,10 +54,7 @@ const observer = new MutationObserver((mutations) => {
 async function render(itemInfo: IItemInfo | null) {
 	const v = await waitForElement(`[data-test="product-title"], h1`);
 	v.insertAdjacentElement("afterend", barcodeWidgetRootElem);
-	ReactDOM.render(
-		<BarcodeWidget itemInfo={itemInfo} />,
-		barcodeWidgetRootElem
-	);
+	reactRoot.render(<BarcodeWidget itemInfo={itemInfo} />);
 }
 
 function extractItemInfo(str: string | null): IItemInfo | null {
