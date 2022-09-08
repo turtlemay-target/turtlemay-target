@@ -23,7 +23,6 @@ new MutationObserver((mutations, observer) => {
 	if (!document.body.contains(myEl)) {
 		render(document.querySelector(footerAdjacentElemSelector));
 	}
-	observer.takeRecords();
 }).observe(document.body, {
 	childList: true,
 	subtree: true,
