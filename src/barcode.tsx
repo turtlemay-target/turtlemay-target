@@ -4,7 +4,7 @@
 
 import * as React from "react";
 import { createRoot } from "react-dom/client";
-import { BarcodeWidget } from "../components/BarcodeWidget";
+import { Barcode } from "../components/Barcode";
 
 const barcodeWidgetRootElem = document.createElement("div");
 barcodeWidgetRootElem.className = "turtlemay__barcodeWidgetRoot";
@@ -37,7 +37,11 @@ function BarcodeApplication() {
 	React.useEffect(initObserver, []);
 	React.useEffect(update, [location.href]);
 
-	return <BarcodeWidget itemInfo={itemInfo} />;
+	return (
+		<div className="turtlemay__barcodeWidget">
+			<Barcode itemInfo={itemInfo} />
+		</div>
+	);
 
 	function initObserver() {
 		const observer = new MutationObserver((mutations) => {
