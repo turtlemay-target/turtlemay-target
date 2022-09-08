@@ -39,9 +39,11 @@ async function render(elem?: Element | null) {
 	reactRoot.render(
 		<span className="turtlemay__footerText">
 			<a className="Link__StyledLink-sc-4b9qcv-0 ghasId" href={packageJson.repository} target="_blank">
+				<span className="turtlemay__footerTextIcon">🧩</span>
 				{manifestJson.name}
 			</a>
-			&nbsp;{manifestJson.version}
+			<span>&nbsp;</span>
+			<span className="turtlemay__footerTextVersion">{manifestJson.version}</span>
 		</span>
 	);
 }

@@ -10,3 +10,11 @@
 .turtlemay__footerText {
 	color: rgb(199, 250, 170);
 }
+
+.turtlemay__footerTextIcon {
+	filter: grayscale(1) contrast(0) brightness(0) invert(1);
+}
+
+.turtlemay__footerTextVersion {
+	color: rgb(255, 203, 190);
+}
