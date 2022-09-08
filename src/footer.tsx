@@ -2,17 +2,12 @@
  * @file Add our info to the site footer.
  */
 
-import * as React from "react";
-import { createRoot } from "react-dom/client";
+import * as React from "jsx-dom";
 import packageJson from "../package.json";
 import manifestJson from "../manifest.json";
 
-const myEl = document.createElement("p");
-myEl.className = "h-text-white h-padding-r-tight";
-const reactRoot = createRoot(myEl);
-
-reactRoot.render(
-	<span className="turtlemay__footerText">
+const elem = (
+	<p className="turtlemay__footerText h-text-white h-padding-r-tight">
 		<a className="Link__StyledLink-sc-4b9qcv-0 ghasId" href={packageJson.repository} target="_blank">
 			<span className="turtlemay__footerTextIcon">🧩</span>
 			<span>&nbsp;</span>
@@ -20,14 +15,14 @@ reactRoot.render(
 		</a>
 		<span>&nbsp;</span>
 		<span className="turtlemay__footerTextVersion">{manifestJson.version}</span>
-	</span>
+	</p>
 );
 
-insertFooterElem(myEl);
+insertFooterElem(elem);
 
 new MutationObserver((mutations, observer) => {
-	if (!document.body.contains(myEl)) {
-		insertFooterElem(myEl);
+	if (!document.body.contains(elem)) {
+		insertFooterElem(elem);
 	}
 }).observe(document.body, {
 	childList: true,
