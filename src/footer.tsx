@@ -20,19 +20,15 @@ const elem = (
 
 insertFooterElem(elem);
 
-new MutationObserver((mutations, observer) => {
-	if (!document.body.contains(elem)) {
-		insertFooterElem(elem);
-	}
-}).observe(document.body, {
-	childList: true,
-	subtree: true,
-});
+new MutationObserver(() => insertFooterElem(elem))
+	.observe(document.body, { childList: true, subtree: true });
 
 function insertFooterElem(elem: Element) {
-	const adjacentElem = document.querySelector(
-		'div[data-test="@web/component-footer/SubFooter"] ' +
-		'a[data-test="@web/component-footer/LegalLink"]:last-of-type'
-	);
-	adjacentElem?.insertAdjacentElement("afterend", elem);
+	if (!document.body.contains(elem)) {
+		const adjacentElem = document.querySelector(
+			'div[data-test="@web/component-footer/SubFooter"] ' +
+			'a[data-test="@web/component-footer/LegalLink"]:last-of-type'
+		);
+		adjacentElem?.insertAdjacentElement("afterend", elem);
+	}
 }

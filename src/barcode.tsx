@@ -14,20 +14,14 @@ reactRoot.render(React.createElement(BarcodeApplication));
 
 insertBarcodeApplication();
 
-const observer = new MutationObserver((mutations) => {
-	if (!document.body.contains(barcodeWidgetRootElem)) {
-		insertBarcodeApplication();
-	}
-});
-
-observer.observe(document.body, {
-	childList: true,
-	subtree: true,
-});
+new MutationObserver(insertBarcodeApplication)
+	.observe(document.body, { childList: true, subtree: true });
 
 async function insertBarcodeApplication() {
-	const adjacentEl = document.querySelector(`[data-test="product-title"], h1`);
-	adjacentEl?.insertAdjacentElement("afterend", barcodeWidgetRootElem);
+	if (!document.body.contains(barcodeWidgetRootElem)) {
+		const adjacentEl = document.querySelector(`[data-test="product-title"], h1`);
+		adjacentEl?.insertAdjacentElement("afterend", barcodeWidgetRootElem);
+	}
 }
 
 function BarcodeApplication() {
@@ -95,7 +89,7 @@ function BarcodeApplication() {
 	}
 }
 
-function Barcode(props: { className?: string; itemInfo: IItemInfo | null}) {
+function Barcode(props: { className?: string; itemInfo: IItemInfo | null }) {
 	const elemRef = React.createRef<HTMLCanvasElement>();
 
 	React.useEffect(update, [
