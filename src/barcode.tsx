@@ -6,25 +6,25 @@ import * as React from "react";
 import JsBarcode from "jsbarcode";
 import { createRoot } from "react-dom/client";
 
-const barcodeWidgetRootElem = document.createElement("div");
-barcodeWidgetRootElem.className = "turtlemay__barcodeWidgetRoot";
+const barcodeAppRootElem = document.createElement("div");
+barcodeAppRootElem.className = "turtlemay__barcodeWidgetRoot";
 
-const reactRoot = createRoot(barcodeWidgetRootElem);
-reactRoot.render(React.createElement(BarcodeApplication));
+const reactRoot = createRoot(barcodeAppRootElem);
+reactRoot.render(React.createElement(BarcodeApp));
 
-insertBarcodeApplication();
+insertBarcodeApp();
 
-new MutationObserver(insertBarcodeApplication)
+new MutationObserver(insertBarcodeApp)
 	.observe(document.body, { childList: true, subtree: true });
 
-async function insertBarcodeApplication() {
-	if (!document.body.contains(barcodeWidgetRootElem)) {
+async function insertBarcodeApp() {
+	if (!document.body.contains(barcodeAppRootElem)) {
 		const adjacentEl = document.querySelector(`[data-test="product-title"], h1`);
-		adjacentEl?.insertAdjacentElement("afterend", barcodeWidgetRootElem);
+		adjacentEl?.insertAdjacentElement("afterend", barcodeAppRootElem);
 	}
 }
 
-function BarcodeApplication() {
+function BarcodeApp() {
 	const [itemInfo, setItemInfo] = React.useState(extractItemInfo(document.body.textContent));
 	const prevLocation = React.useRef(location.href);
 
