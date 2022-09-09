@@ -1,16 +1,22 @@
 {
 	"compilerOptions": {
-		"outDir": "out",
 		"allowJs": true,
-		"target": "ES2018",
-		"moduleResolution": "node",
-		"resolveJsonModule": true,
 		"allowSyntheticDefaultImports": true,
+		"checkJs": true,
 		"jsx": "react",
+		"moduleResolution": "node",
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"outDir": "out",
+		"resolveJsonModule": true,
+		"sourceMap": true,
 		"strictFunctionTypes": true,
 		"strictNullChecks": true,
-		"noImplicitReturns": true,
-		"noImplicitThis": true
+		"target": "esnext"
 	},
-	"exclude": ["node_modules"]
+	"exclude": [
+		"node_modules",
+		"dist",
+		"out"
+	]
 }
