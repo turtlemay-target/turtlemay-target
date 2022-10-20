@@ -31,11 +31,15 @@ function BarcodeApp() {
 	React.useEffect(initObserver, []);
 	React.useEffect(update, [location.href]);
 
-	return (
-		<div className="turtlemay__barcodeWidget">
-			<Barcode itemInfo={itemInfo} />
-		</div>
-	);
+	if (itemInfo) {
+		return (
+			<div className="turtlemay__barcodeWidget">
+				<Barcode itemInfo={itemInfo} />
+			</div>
+		);
+	}
+
+	return null;
 
 	function initObserver() {
 		const observer = new MutationObserver((mutations) => {
