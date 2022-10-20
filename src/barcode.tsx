@@ -6,16 +6,25 @@ import * as React from "react";
 import JsBarcode from "jsbarcode";
 import { createRoot } from "react-dom/client";
 
-const barcodeAppRootElem = document.createElement("div");
-barcodeAppRootElem.className = "turtlemay__barcodeWidgetRoot";
+let barcodeAppRootElem: HTMLElement;
 
-const reactRoot = createRoot(barcodeAppRootElem);
-reactRoot.render(React.createElement(BarcodeApp));
+const isProductPage = Boolean(
+	location.pathname.startsWith("/p") ||
+	document.querySelector(`meta[content="product"]`)
+);
 
-insertBarcodeApp();
+if (isProductPage) {
+	barcodeAppRootElem = document.createElement("div");
+	barcodeAppRootElem.className = "turtlemay__barcodeWidgetRoot";
 
-new MutationObserver(insertBarcodeApp)
-	.observe(document.body, { childList: true, subtree: true });
+	const reactRoot = createRoot(barcodeAppRootElem);
+	reactRoot.render(React.createElement(BarcodeApp));
+
+	insertBarcodeApp();
+
+	new MutationObserver(insertBarcodeApp)
+		.observe(document.body, { childList: true, subtree: true });
+}
 
 async function insertBarcodeApp() {
 	if (!document.body.contains(barcodeAppRootElem)) {
