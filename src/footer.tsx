@@ -2,21 +2,24 @@
  * @file Add our info to the site footer.
  */
 
-import * as React from "jsx-dom";
 import packageJson from "../package.json";
 import manifestJson from "../manifest.json";
 
-const elem = (
-	<p className="turtlemay__footerText h-padding-r-tight">
-		<a className="Link__StyledLink-sc-4b9qcv-0 ghasId" href={packageJson.repository} target="_blank">
-			<span className="turtlemay__footerTextIcon">🧩</span>
+const elem = document.createElement("p");
+
+elem.className = "h-padding-r-tight";
+
+elem.innerHTML = `
+	<span class="turtlemay__footerText">
+		<a class="Link__StyledLink-sc-4b9qcv-0 ghasId" href="${packageJson.repository}" target="_blank">
+			<span class="turtlemay__footerTextIcon">🧩</span>
 			<span>&nbsp;</span>
-			<span>{manifestJson.name}</span>
+			<span>${manifestJson.name}</span>
 		</a>
 		<span>&nbsp;</span>
-		<span className="turtlemay__footerTextVersion">{manifestJson.version}</span>
-	</p>
-);
+		<span class="turtlemay__footerTextVersion">${manifestJson.version}</span>
+	</span>
+`;
 
 insertFooterElem(elem);
 
