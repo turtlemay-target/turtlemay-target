@@ -126,7 +126,7 @@ function Barcode(props: { className?: string; itemInfo: IItemInfo | null }) {
 	}
 
 	return React.createElement("canvas", {
-		className: `${props.className} turtlemay__enterAnimation`,
+		className: `${props.className ?? ""} turtlemay__enterAnimation`,
 		key: props.itemInfo?.upc ?? props.itemInfo?.dpci ?? props.itemInfo?.tcin,
 		ref: elemRef,
 	});
