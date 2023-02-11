@@ -4,29 +4,31 @@
 
 import * as React from "react";
 import JsBarcode from "jsbarcode";
-import { createRoot } from "react-dom/client";
+import { Root, createRoot } from "react-dom/client";
 
-let barcodeAppRootElem: HTMLElement;
+let barcodeAppRootElem: HTMLElement | undefined;
+let reactRoot: Root | undefined;
 
-const isProductPage = Boolean(
-	location.pathname.startsWith("/p") ||
-	document.querySelector(`meta[content="product"]`)
-);
+if (isProductPage())
+	initBarcodeApp();
 
-if (isProductPage) {
-	barcodeAppRootElem = document.createElement("div");
-	barcodeAppRootElem.className = "turtlemay__barcodeWidgetRoot";
+void new MutationObserver(update)
+	.observe(document.body, { childList: true, subtree: true });
 
-	const reactRoot = createRoot(barcodeAppRootElem);
-	reactRoot.render(React.createElement(BarcodeApp));
-
-	insertBarcodeApp();
-
-	new MutationObserver(insertBarcodeApp)
-		.observe(document.body, { childList: true, subtree: true });
+function update() {
+	if (isProductPage())
+		initBarcodeApp();
 }
 
-async function insertBarcodeApp() {
+async function initBarcodeApp() {
+	if (!barcodeAppRootElem) {
+		barcodeAppRootElem = document.createElement("div");
+		barcodeAppRootElem.className = "turtlemay__barcodeWidgetRoot";
+	}
+	if (!reactRoot) {
+		reactRoot = createRoot(barcodeAppRootElem);
+		reactRoot.render(React.createElement(BarcodeApp));
+	}
 	if (!document.body.contains(barcodeAppRootElem)) {
 		const adjacentEl = document.querySelector(`[data-test="product-title"], h1`);
 		adjacentEl?.insertAdjacentElement("afterend", barcodeAppRootElem);
@@ -143,6 +145,13 @@ function Barcode(props: { className?: string; itemInfo: IItemInfo | null }) {
 		key: props.itemInfo?.upc ?? props.itemInfo?.dpci ?? props.itemInfo?.tcin,
 		ref: elemRef,
 	});
+}
+
+function isProductPage() {
+	return Boolean(
+		location.pathname.startsWith("/p") ||
+		document.querySelector(`meta[content="product"]`)
+	);
 }
 
 function extractItemInfo(str: string | null): IItemInfo | null {
