@@ -20,7 +20,7 @@ function update() {
 		initBarcodeApp();
 }
 
-async function initBarcodeApp() {
+function initBarcodeApp() {
 	if (!barcodeAppRootElem) {
 		barcodeAppRootElem = document.createElement("div");
 		barcodeAppRootElem.className = "turtlemay__barcodeWidgetRoot";
