@@ -176,5 +176,5 @@ function matchDPCI(str: string | null): string | null {
 }
 
 function matchTCIN(str: string | null): string | null {
-	return str?.match(/TCIN:\ (\d{8})/)?.[1] || null;
+	return str?.match(/TCIN:\ (\d+)/)?.[1] || null;
 }
