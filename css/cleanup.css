@@ -30,3 +30,7 @@ div:has(> a > p[class*="OfferDetailsText"]) {
 div[class*="IllustrationWrapper"] {
 	display: none;
 }
+
+div[class*="StyledCol"]:has(>div[data-test*="ProductCard"] p[data-test="sponsoredText"]) {
+	display: none;
+}
