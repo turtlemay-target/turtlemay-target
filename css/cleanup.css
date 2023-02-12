@@ -1,0 +1,32 @@
+/**
+ * Hide some annoying elements.
+ */
+
+div:has(> div[class*="PubAdWrapper"]) {
+	display: none;
+}
+
+div[data-component-title="Roundel"] {
+	display: none;
+}
+
+div[data-test="globalBannerContainer"] {
+	display: none;
+}
+
+div[data-component-title="SLP Recommendations"] {
+	display: none;
+}
+
+div[data-test="related-searches-and-categories"] {
+	display: none;
+}
+
+div:has(> [class*="SignUpHeading"]),
+div:has(> a > p[class*="OfferDetailsText"]) {
+	display: none;
+}
+
+div[class*="IllustrationWrapper"] {
+	display: none;
+}

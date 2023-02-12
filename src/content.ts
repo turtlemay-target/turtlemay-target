@@ -5,3 +5,4 @@ import "./search";
 import "./pickresult";
 
 import "../css/style.css";
+import "../css/cleanup.css";
