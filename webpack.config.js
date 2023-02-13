@@ -51,6 +51,7 @@ const userscriptConfig = {
 					icon: "https://www.google.com/s2/favicons?sz=64&domain=target.com",
 					version: manifestJson.version,
 					match: "https://*.target.com/*",
+					updateURL: "https://turtlemay-target-web.netlify.app/turtlemay-target.user.js",
 				},
 			}],
 		}),
