@@ -60,6 +60,8 @@ function BarcodeApp() {
 				setItemInfo(extractItemInfo(document.body.textContent));
 			}
 
+			expandSpecifications();
+
 			for (const mutation of mutations) {
 				// Detect selected item variation.
 				if (
@@ -152,6 +154,15 @@ function isProductPage() {
 		location.pathname.startsWith("/p") ||
 		document.querySelector(`meta[content="product"]`)
 	);
+}
+
+/**
+ * Expand the "Specifications" heading containing the barcode information we need.
+ */
+function expandSpecifications() {
+	const expandableElems = document.querySelectorAll<HTMLElement>("a[aria-expanded='false'] h3");
+	const clickEl = Array.from(expandableElems).find(v => v.textContent === "Specifications");
+	clickEl?.click();
 }
 
 function extractItemInfo(str: string | null): IItemInfo | null {
