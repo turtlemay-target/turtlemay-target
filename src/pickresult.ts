@@ -16,6 +16,12 @@ addEventListener("keydown", (event: KeyboardEvent) => {
 		const i = n === 0 ? 9 : n - 1;
 
 		const clickEl = elems?.[i] as HTMLAnchorElement | undefined;
-		clickEl?.click();
+		
+		// Hold ctrl to open in new window.
+		if (event.ctrlKey && clickEl?.href) {
+			window.open(clickEl.href, "_blank");
+		} else {
+			clickEl?.click();
+		}
 	}
 });
