@@ -37,6 +37,7 @@ function initBarcodeApp() {
 
 function BarcodeApp() {
 	const [itemInfo, setItemInfo] = React.useState(extractItemInfo(document.body.textContent));
+	const [itemInfoProp, setItemInfoProp] = React.useState("upc");
 	const prevLocation = React.useRef(location.href);
 
 	React.useEffect(initObserver, []);
@@ -45,12 +46,29 @@ function BarcodeApp() {
 	if (itemInfo) {
 		return (
 			<div className="turtlemay__barcodeWidget">
-				<Barcode itemInfo={itemInfo} />
+				<div className="turtlemay__barcodeWidgetTabs">
+					<BarcodeTab propName="upc" />
+					<BarcodeTab propName="dpci" />
+					<BarcodeTab propName="tcin" />
+				</div>
+				<div className="turtlemay__barcodeWidgetBarcodeContainer">
+					<Barcode className="turtlemay__barcodeWidgetBarcode" itemInfo={{ [itemInfoProp]: itemInfo[itemInfoProp] }} />
+				</div>
 			</div>
 		);
 	}
 
 	return null;
+
+	function BarcodeTab(o: { propName: string }) {
+		if (!itemInfo?.[o.propName]) {
+			return null;
+		} else return (
+			<a data-turtlemay-active={itemInfoProp === o.propName || null} onClick={() => setItemInfoProp(o.propName)}>
+				{o.propName.toUpperCase()}
+			</a>
+		);
+	}
 
 	function initObserver() {
 		const observer = new MutationObserver((mutations) => {

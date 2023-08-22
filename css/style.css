@@ -1,8 +1,27 @@
 .turtlemay__barcodeWidget {
+	margin: 1em 0;
+}
+
+.turtlemay__barcodeWidgetTabs a {
+	display: inline-block;
+	font-size: 16px;
+	padding: 0.5em 1em;
+	margin: 0 5px 0 0;
+	background: white;
+	border-radius: 4px 4px 0 0;
+	cursor: pointer;
+	user-select: none;
+}
+
+.turtlemay__barcodeWidgetTabs a[data-turtlemay-active] {
+	font-weight: bold;
+	background: rgb(247, 247, 247);
+}
+
+.turtlemay__barcodeWidgetBarcodeContainer {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin: 1em 0;
 	padding: 1em 0.25em;
 	background: rgb(247, 247, 247);
 }
