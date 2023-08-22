@@ -146,6 +146,7 @@ function Barcode(props: { className?: string; itemInfo: IItemInfo | null }) {
 		className: `${props.className ?? ""} turtlemay__enterAnimation`,
 		key: props.itemInfo?.upc ?? props.itemInfo?.dpci ?? props.itemInfo?.tcin,
 		ref: elemRef,
+		onClick: scrollToItemInfo,
 	});
 }
 
@@ -163,6 +164,20 @@ function expandSpecifications() {
 	const expandableElems = document.querySelectorAll<HTMLElement>("a[aria-expanded='false'] h3");
 	const clickEl = Array.from(expandableElems).find(v => v.textContent === "Specifications");
 	clickEl?.click();
+}
+
+/**
+ * Scroll to the current barcode information if present.
+ */
+function scrollToItemInfo() {
+	const elems = document.querySelectorAll<HTMLElement>("[data-test='item-details-specifications'] b");
+	const scrollToEl = Array.from(elems).find(v => {
+		if (v.textContent === "UPC") return true;
+		if (v.textContent === "TCIN") return true;
+		if (v.textContent?.includes("DPCI")) return true;
+		return false;
+	});
+	scrollToEl?.scrollIntoView({ block: "center" });
 }
 
 function extractItemInfo(str: string | null): IItemInfo | null {
