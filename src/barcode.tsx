@@ -171,13 +171,31 @@ function expandSpecifications() {
  */
 function scrollToItemInfo() {
 	const elems = document.querySelectorAll<HTMLElement>("[data-test='item-details-specifications'] b");
-	const scrollToEl = Array.from(elems).find(v => {
+
+	// We will play an animation to draw attention to these.
+	const highlightElems = Array.from(elems).filter(v => {
 		if (v.textContent === "UPC") return true;
 		if (v.textContent === "TCIN") return true;
 		if (v.textContent?.includes("DPCI")) return true;
 		return false;
 	});
+
+	const scrollToEl = highlightElems[0];
 	scrollToEl?.scrollIntoView({ block: "center" });
+
+	for (const el of highlightElems) {
+		// Apply CSS animation.
+		el.classList.add("turtlemay__attentionTextAnimation");
+
+		// CSS animation only works on block elements.
+		if (el.style.display === "inline")
+			el.style.display = "inline-block";
+
+		// Reset animation.
+		el.style.animation = "none";
+		el.offsetWidth;
+		el.style.animation = "";
+	}
 }
 
 function extractItemInfo(str: string | null): IItemInfo | null {
