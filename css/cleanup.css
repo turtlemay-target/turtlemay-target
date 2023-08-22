@@ -34,3 +34,15 @@ div[class*="IllustrationWrapper"] {
 div[class*="StyledCol"]:has(>div[data-test*="ProductCard"] p[data-test="sponsoredText"]) {
 	display: none;
 }
+
+div[data-component-type="Superhero"] div[data-test*="@web"]{
+	display: none;
+}
+
+div[data-test="pic-nav-automation"] {
+	display: none;
+}
+
+div[data-test="redcard-banner-container"] {
+	display: none;
+}
