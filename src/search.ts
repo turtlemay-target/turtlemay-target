@@ -29,15 +29,7 @@ function onKeyDown(event: KeyboardEvent) {
 	}
 
 	if (document.activeElement?.nodeName !== "INPUT") {
-		if (event.key === "Enter") {
-			event.preventDefault();
-			openMobileSearchModal();
-			const inputEl = querySelectorFirst<HTMLInputElement>(document, searchInputSelectors);
-			if (!inputEl) return;
-			inputEl.focus();
-			inputEl.value = "";
-		}
-		else if (event.key.match(/^([a-zA-Z])$/)?.[1] && !event.ctrlKey && !event.altKey) {
+		if (event.key.match(/^([a-zA-Z])$/)?.[1] && !event.ctrlKey && !event.altKey) {
 			openMobileSearchModal();
 			const inputEl = querySelectorFirst<HTMLInputElement>(document, searchInputSelectors);
 			if (!inputEl) return;
