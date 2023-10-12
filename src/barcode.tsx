@@ -165,6 +165,7 @@ function Barcode(props: { className?: string; itemInfo: IItemInfo | null }) {
 		key: props.itemInfo?.upc ?? props.itemInfo?.dpci ?? props.itemInfo?.tcin,
 		ref: elemRef,
 		onClick: scrollToItemInfo,
+		style: { cursor: "pointer" },
 	});
 }
 
