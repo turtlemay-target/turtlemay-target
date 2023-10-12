@@ -179,7 +179,7 @@ function isProductPage() {
  * Expand the "Specifications" heading containing the barcode information we need.
  */
 function expandSpecifications() {
-	const expandableElems = document.querySelectorAll<HTMLElement>("a[aria-expanded='false'] h3");
+	const expandableElems = document.querySelectorAll<HTMLElement>("[aria-expanded='false'] h3");
 	const clickEl = Array.from(expandableElems).find(v => v.textContent === "Specifications");
 	clickEl?.click();
 }
