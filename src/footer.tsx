@@ -35,3 +35,5 @@ function insertFooterElem(elem: Element) {
 		adjacentElem?.insertAdjacentElement("afterend", elem);
 	}
 }
+
+export { insertFooterElem };
