@@ -1,3 +1,7 @@
 import manifestJson from "../manifest.json";
 
-console.info(`🧩 Using ${manifestJson.name} ${manifestJson.version}.`);
+function displayWelcomeMessage() {
+  console.info(`🧩 Using ${manifestJson.name} ${manifestJson.version}.`);
+}
+
+export { displayWelcomeMessage };

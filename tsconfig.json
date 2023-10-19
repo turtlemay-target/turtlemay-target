@@ -1,22 +1,26 @@
 {
 	"compilerOptions": {
-		"allowJs": true,
-		"allowSyntheticDefaultImports": true,
-		"checkJs": true,
-		"jsx": "react",
-		"moduleResolution": "node",
-		"noImplicitReturns": true,
-		"noImplicitThis": true,
-		"outDir": "out",
-		"resolveJsonModule": true,
-		"sourceMap": true,
-		"strictFunctionTypes": true,
-		"strictNullChecks": true,
-		"target": "ES2018"
+	  "target": "ES6",
+	  "jsx": "react",
+	  "module": "CommonJS",
+	  "strict": true,
+	  "esModuleInterop": true,
+	  "skipLibCheck": true,
+	  "forceConsistentCasingInFileNames": true,
+	  "outDir": "./dist",
+	  "resolveJsonModule": true
 	},
 	"exclude": [
-		"node_modules",
-		"dist",
-		"out"
+	  "node_modules",
+	  "dist",
+	  "out",
+	  "coverage" // Optional: Exclude coverage directory if generating code coverage
+	],
+	"include": [
+	  "src/**/*.ts",       // Include TypeScript source files
+	  "src/**/*.tsx",      // Include TypeScript React source files
+	  "test/**/*.ts",      // Include test TypeScript files if necessary
+	  "test/**/*.tsx"
 	]
-}
+  }
+  
