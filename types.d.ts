@@ -5,3 +5,4 @@ declare interface IItemInfo {
 	[key: string]: string | null;
   }
   
+  export { IItemInfo };

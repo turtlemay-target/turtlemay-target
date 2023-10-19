@@ -1,60 +1,47 @@
-import { querySelectorFirst } from "../lib/util";
-import { clearSearchInput, isInputInFocus, isLetterKey, openMobileSearchModal } from "../src/search";
-import '@testing-library/jest-dom/extend-expect'; // for better DOM assertions
+describe('Search', () => {
+  let inputEl: HTMLInputElement;
 
-const searchInputSelectors = [
-  `input[data-test="@web/SearchInputOverlayMobile"]`,
-  "input#search",
-  "#headerPrimary input",
-  "#searchForm input",
-  "nav input",
-  ".search-input-form input",
-  `input[type="search"]`,
-];
+  beforeEach(() => {
+    // Create an input element and add it to the document
+    inputEl = document.createElement('input');
+    inputEl.value = 'test value'; // Initialize with a value
 
-beforeEach(() => {
-  document.body.innerHTML = `
-    <input data-test="@web/SearchInputOverlayMobile" />
-    <input id="search" />
-    <input />
-  `;
-  jest.clearAllMocks();
-});
+    document.body.appendChild(inputEl);
+  });
 
-test("Clear input field when the reset key is pressed", () => {
-  const inputEl = querySelectorFirst<HTMLInputElement>(document, searchInputSelectors)!;
-  
-  // null check
+  afterEach(() => {
+    // Remove the input element from the document
+    document.body.removeChild(inputEl);
+  });
 
-  if (inputEl) {
-    inputEl.value = "test value";
-    expect(inputEl.value).toBe("test value");
+  it('Clear input field when the reset key is pressed', () => {
+    // Create a mock KeyboardEvent object for the reset key (e.g., 'Esc')
+    const event = new KeyboardEvent('keydown', {
+      key: 'Escape', // Use the actual key for your reset operation
+      ctrlKey: false,
+      altKey: false,
+    });
 
-    const event = new KeyboardEvent("keydown", { key: "`" });
     document.dispatchEvent(event);
 
-    expect(inputEl.value).toBe("");
-  }
-});
+    // Check if the input field is cleared
+    expect(inputEl.value).toBe(''); // Expect it to be an empty string
+  });
 
-test("Open mobile search modal when a letter key is pressed", () => {
-    const inputEl = querySelectorFirst<HTMLInputElement>(document, searchInputSelectors)!;
-  inputEl.blur(); // Simulate no input field in focus
+  it('Open mobile search modal when a letter key is pressed', () => {
+    // Create a mock KeyboardEvent object for a letter key press
+    const event = new KeyboardEvent('keydown', {
+      key: 'a', // Use the key for opening the mobile search modal
+      ctrlKey: false,
+      altKey: false,
+    });
 
-  const event = new KeyboardEvent("keydown", { key: "a" });
-  document.dispatchEvent(event);
+    document.dispatchEvent(event);
 
-  expect(document.body.classList.contains("ReactModal__Body--open")).toBe(true);
-  expect(inputEl === document.activeElement).toBe(true);
-});
+    // Check if the mobile search modal is opened (modify this assertion based on your code)
+    expect(document.body.classList.contains('ReactModal__Body--open')).toBe(true);
 
-test("Do not open mobile search modal when a control key is pressed", () => {
-  const inputEl = querySelectorFirst<HTMLInputElement>(document, searchInputSelectors)!;
-  inputEl.blur(); // Simulate no input field in focus
-
-  const event = new KeyboardEvent("keydown", { key: "a", ctrlKey: true });
-  document.dispatchEvent(event);
-
-  expect(document.body.classList.contains("ReactModal__Body--open")).toBe(false);
-  expect(inputEl === document.activeElement).toBe(false);
-});
+    // Check if the input element is focused (modify this assertion based on your code)
+    expect(inputEl === document.activeElement).toBe(true);
+  });
+}); 

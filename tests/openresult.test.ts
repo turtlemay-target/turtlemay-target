@@ -1,58 +1,47 @@
 import { handleKeyboardEvent } from '../src/openresult';
 
 describe('handleKeyboardEvent', () => {
-  let originalLocationSearch, originalWindowOpen;
+  let mockClickEl: HTMLAnchorElement | undefined;
+  const mockEvent: KeyboardEvent = {
+    key: '1',
+    ctrlKey: false,
+  } as KeyboardEvent;
+
+  beforeAll(() => {
+    // Mock querySelectorAll to return a mock array of elements
+    const mockElements = [
+      { href: 'https://example.com/1' },
+      { href: 'https://example.com/2' }, 
+    ];
+
+    // Mock the document.querySelectorAll method
+    document.querySelectorAll = jest.fn().mockReturnValue(mockElements);
+    mockClickEl = mockElements[0] as HTMLAnchorElement | undefined;
+  });
 
   beforeEach(() => {
-    // Store the original values to restore them later
-    originalLocationSearch = window.location.search;
-    originalWindowOpen = window.open;
-
-    // Mock the relevant properties and methods
-    Object.defineProperty(window.location, 'search', {
-      writable: true,
-      value: '',
-    });
-    window.open = jest.fn();
+    // Reset the mock function and properties before each test
+    jest.clearAllMocks();
   });
 
-  afterEach(() => {
-    // Restore the original values
-    window.location.search = originalLocationSearch;
-    window.open = originalWindowOpen;
-  });
-  
-  it('should click on the first product card', () => {
-    // Create a mock KeyboardEvent object
-    const event = new KeyboardEvent('keydown', {
-      key: '1',
-      ctrlKey: false,
-      altKey: false, // Add more properties as needed
-    });
-
-    // Simulate the keypress event with the mock KeyboardEvent
-    handleKeyboardEvent(event);
-
-    // Perform assertions to check the expected behavior
-    expect(window.location.search).toBe(''); // Check if the location.search was not modified
-    expect(window.open).not.toHaveBeenCalled(); // Ensure that window.open was not called
-    // Add more assertions based on your specific HTML structure and expectations
+  it('should click the first search result', () => {
+    const clickSpy = jest.spyOn(mockClickEl as HTMLAnchorElement, 'click');
+    handleKeyboardEvent(mockEvent);
+    expect(clickSpy).toBeCalled();
   });
 
-  it('should open the first product card in a new tab when Ctrl is held', () => {
-    // Create a mock KeyboardEvent object
-    const event = new KeyboardEvent('keydown', {
-      key: '1',
-      ctrlKey: true,
-      altKey: false, // Add more properties as needed
-    });
+  it('should open a new window when Ctrl key is held', () => {
+    const eventWithCtrl = { ...mockEvent, ctrlKey: true };
+    const openSpy = jest.spyOn(window, 'open').mockImplementation(() => null);
+    handleKeyboardEvent(eventWithCtrl);
+    expect(openSpy).toBeCalledWith(mockClickEl?.href, '_blank');
+  }); 
 
-    // Simulate the keypress event with the mock KeyboardEvent
-    handleKeyboardEvent(event);
-
-    // Perform assertions to check the expected behavior
-    expect(window.location.search).toBe(''); // Check if the location.search was not modified
-    expect(window.open).toHaveBeenCalled(); // Ensure that window.open was called
-    // Add more assertions based on your specific expectations
+  it('should not do anything for an invalid key', () => {
+    const eventWithInvalidKey = { ...mockEvent, key: 'A' };
+    handleKeyboardEvent(eventWithInvalidKey);
+    // Ensure no click or window.open was called
+    expect(mockClickEl?.click).not.toBeCalled();
+    expect(window.open).not.toBeCalled();
   });
-});
+}); 

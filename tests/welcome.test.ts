@@ -14,7 +14,6 @@ describe("Welcome Module", () => {
     displayWelcomeMessage();
 
     // Check if console.info was called with the expected message 
-    expect(mockedConsoleInfo).toHaveBeenCalledWith(`🧩 Using ${manifestJson.name} ${manifestJson.version}.`);
-
+    expect(mockedConsoleInfo).toHaveBeenCalledWith(`🧩 Using ${manifestJson.name} ${manifestJson.version}.`); 
   });
 });

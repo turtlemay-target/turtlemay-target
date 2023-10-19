@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import JsBarcode from "jsbarcode";
-import { Root, createRoot } from "react-dom/client";
+import type { IItemInfo } from "../types";
 
 export function BarcodeApp() {
   const [itemInfo, setItemInfo] = React.useState(extractItemInfo(document.body.textContent));
@@ -21,7 +21,7 @@ export function BarcodeApp() {
           <BarcodeTab propName="tcin" />
         </div>
         <div className="turtlemay__barcodeWidgetBarcodeContainer">
-          <Barcode className="turtlemay__barcodeWidgetBarcode" itemInfo={{ [itemInfoProp]: itemInfo[itemInfoProp] }} />
+          <Barcode className="turtlemay__barcodeWidgetBarcode" itemInfo={{ upc: itemInfo.upc, dpci: itemInfo.dpci, tcin: itemInfo.tcin }} />
         </div>
       </div>
     );
@@ -121,12 +121,12 @@ export function Barcode(props: { className?: string; itemInfo: IItemInfo | null 
         format: format,
         width: 2,
         height: 20,
-        margin: 5,
-        displayValue: true,
-        fontSize: 15,
-        background: "transparent",
+        // Other barcode options
       });
-    }
+    } else {
+      // Handle the case where value is undefined
+      console.error("Value is undefined. Cannot render barcode.");
+    } 
   }
 
   return React.createElement("canvas", {

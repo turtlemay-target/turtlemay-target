@@ -26,7 +26,7 @@ insertFooterElem(elem);
 new MutationObserver(() => insertFooterElem(elem))
 	.observe(document.body, { childList: true, subtree: true });
 
-function insertFooterElem(elem: Element) {
+function insertFooterElem(elem: Element) { // Specify the type as Element
 	if (!document.body.contains(elem)) {
 		const adjacentElem = document.querySelector(
 			'div[data-test="@web/component-footer/SubFooter"] ' +
@@ -36,4 +36,4 @@ function insertFooterElem(elem: Element) {
 	}
 }
 
-export { insertFooterElem };
+export { insertFooterElem, elem };
