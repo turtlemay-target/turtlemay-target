@@ -7,7 +7,7 @@
 	"content_scripts": [
 		{
 			"matches": ["https://*.target.com/*"],
-			"css": ["css/style.css"],
+			"css": ["css/style.css", "css/cleanup.css"],
 			"js": ["out/content.js"]
 		}
 	],
