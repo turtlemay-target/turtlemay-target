@@ -6,36 +6,36 @@ import * as React from "react";
 import JsBarcode from "jsbarcode";
 import { Root, createRoot } from "react-dom/client";
 
-let barcodeAppRootElem: HTMLElement | undefined;
+let rootEl: HTMLElement | undefined;
 let reactRoot: Root | undefined;
 
 if (isProductPage())
-	initBarcodeApp();
+	initBarcodeWidget();
 
 void new MutationObserver(update)
 	.observe(document.body, { childList: true, subtree: true });
 
 function update() {
 	if (isProductPage())
-		initBarcodeApp();
+		initBarcodeWidget();
 }
 
-function initBarcodeApp() {
-	if (!barcodeAppRootElem) {
-		barcodeAppRootElem = document.createElement("div");
-		barcodeAppRootElem.className = "turtlemay__barcodeWidgetRoot";
+function initBarcodeWidget() {
+	if (!rootEl) {
+		rootEl = document.createElement("div");
+		rootEl.className = "turtlemay__barcodeWidgetRoot";
 	}
 	if (!reactRoot) {
-		reactRoot = createRoot(barcodeAppRootElem);
-		reactRoot.render(React.createElement(BarcodeApp));
+		reactRoot = createRoot(rootEl);
+		reactRoot.render(React.createElement(BarcodeWidget));
 	}
-	if (!document.body.contains(barcodeAppRootElem)) {
+	if (!document.body.contains(rootEl)) {
 		const adjacentEl = document.querySelector(`[data-test="product-title"], h1`);
-		adjacentEl?.insertAdjacentElement("afterend", barcodeAppRootElem);
+		adjacentEl?.insertAdjacentElement("afterend", rootEl);
 	}
 }
 
-function BarcodeApp() {
+function BarcodeWidget() {
 	const [itemInfo, setItemInfo] = React.useState(extractItemInfo(document.body.textContent));
 	const [itemInfoProp, setItemInfoProp] = React.useState("upc");
 	const prevLocation = React.useRef(location.href);
