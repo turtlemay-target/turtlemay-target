@@ -28,7 +28,7 @@ const extensionConfig = {
 	entry: "./scripts/content.ts",
 	output: {
 		path: path.resolve(__dirname, "out"),
-		filename: "[name].js",
+		filename: "content.js",
 	},
 };
 
