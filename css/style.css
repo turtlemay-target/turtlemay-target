@@ -10,11 +10,11 @@
 
 .turtlemay__mathWidget {
 	position: absolute;
-	top: 0;
+	bottom: 0;
 	right: 5em;
 	padding: 1em;
 	background: rgba(0, 0, 0, 0.9);
-	border-radius: 0 0 10px 10px;
+	border-radius: 10px 10px 0 0;
 	color: #fff;
 	font: 16px "Helvetica for Target", HelveticaForTarget, Targetica, "HelveticaNeue for Target", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	transition: all 200ms;
@@ -22,7 +22,7 @@
 }
 
 .turtlemay__mathWidget:not([data-turtlemay-active="true"]) {
-	transform: translateY(-100%);
+	transform: translateY(100%);
 }
 
 .turtlemay__mathWidgetEqualsSign {
