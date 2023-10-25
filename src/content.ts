@@ -1,8 +1,8 @@
 import "./welcome";
 import "./footer";
-import "./barcode";
-import "./search";
-import "./openresult";
+import "./product-barcode";
+import "./search-field";
+import "./open-result";
 
 import "../css/style.css";
 import "../css/cleanup.css";
