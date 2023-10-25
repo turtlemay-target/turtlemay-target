@@ -37,7 +37,7 @@ function initBarcodeWidget() {
 
 function BarcodeWidget() {
 	const [itemInfo, setItemInfo] = React.useState(extractItemInfo(document.body.textContent));
-	const [itemInfoProp, setItemInfoProp] = React.useState("upc");
+	const [activeItemInfoProp, setActiveItemInfoProp] = React.useState("upc");
 	const prevLocation = React.useRef(location.href);
 
 	React.useEffect(initObserver, []);
@@ -52,7 +52,7 @@ function BarcodeWidget() {
 					<BarcodeTab propName="tcin" />
 				</div>
 				<div className="turtlemay__barcodeWidgetBarcodeContainer">
-					<Barcode className="turtlemay__barcodeWidgetBarcode" itemInfo={{ [itemInfoProp]: itemInfo[itemInfoProp] }} />
+					<Barcode className="turtlemay__barcodeWidgetBarcode" itemInfo={{ [activeItemInfoProp]: itemInfo[activeItemInfoProp] }} />
 				</div>
 			</div>
 		);
@@ -64,7 +64,7 @@ function BarcodeWidget() {
 		if (!itemInfo?.[o.propName]) {
 			return null;
 		} else return (
-			<a data-turtlemay-active={itemInfoProp === o.propName || null} onClick={() => setItemInfoProp(o.propName)}>
+			<a data-turtlemay-active={activeItemInfoProp === o.propName || null} onClick={() => setActiveItemInfoProp(o.propName)}>
 				{o.propName.toUpperCase()}
 			</a>
 		);
