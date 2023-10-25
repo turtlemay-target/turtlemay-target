@@ -93,15 +93,20 @@ function Barcode(props: { className?: string; value: string; }) {
 			if (props.value.length === 13) format = "ean13";
 		}
 
-		JsBarcode(elemRef.current as HTMLCanvasElement, props.value, {
-			format: format,
-			width: 2,
-			height: 15,
-			margin: 5,
-			displayValue: true,
-			fontSize: 15,
-			background: "transparent",
-		});
+		try {
+			JsBarcode(elemRef.current as HTMLCanvasElement, props.value, {
+				format: format,
+				width: 2,
+				height: 15,
+				margin: 5,
+				displayValue: true,
+				fontSize: 15,
+				background: "transparent",
+			});
+		}
+		catch (error) {
+			console.error(error);
+		}
 	}
 }
 
