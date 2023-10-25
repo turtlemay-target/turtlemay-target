@@ -41,7 +41,6 @@ function BarcodeWidget() {
 	const prevLocation = React.useRef(location.href);
 
 	React.useEffect(initObserver, []);
-	React.useEffect(update, [location.href]);
 
 	if (itemInfo) {
 		return (
@@ -117,10 +116,6 @@ function BarcodeWidget() {
 		});
 
 		return () => observer.disconnect();
-	}
-
-	function update() {
-		setItemInfo(extractItemInfo(document.body.textContent));
 	}
 }
 
