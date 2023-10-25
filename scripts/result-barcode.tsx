@@ -80,6 +80,7 @@ function Barcode(props: { className?: string; value: string; }) {
 
 	return React.createElement("canvas", {
 		className: `${props.className ?? ""} turtlemay__enterAnimation`,
+		width: 0, height: 0,
 		key: props.value,
 		ref: elemRef,
 	});
