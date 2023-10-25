@@ -1,3 +1,40 @@
+.turtlemay__mathWidgetContainer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 100000;
+	pointer-events: none;
+}
+
+.turtlemay__mathWidget {
+	position: absolute;
+	top: 0;
+	right: 5em;
+	padding: 1em;
+	background: rgba(0, 0, 0, 0.9);
+	border-radius: 0 0 10px 10px;
+	color: #fff;
+	font: 16px "Helvetica for Target", HelveticaForTarget, Targetica, "HelveticaNeue for Target", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	transition: all 200ms;
+	pointer-events: all;
+}
+
+.turtlemay__mathWidget:not([data-turtlemay-active="true"]) {
+	transform: translateY(-100%);
+}
+
+.turtlemay__mathWidgetEqualsSign {
+	font-weight: bold;
+	color: #666;
+}
+
+.turtlemay__mathWidgetEqualsSign:after {
+	content: " ";
+	white-space: pre;
+}
+
 .turtlemay__barcodeWidget {
 	margin: 1em 0;
 }
