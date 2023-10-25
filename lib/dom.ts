@@ -1,3 +1,7 @@
+/**
+ * @file DOM helper functions.
+ */
+
 /** Check for elements in order and get the first one found. */
 export function querySelectorFirst<T extends Element>(
 	obj: Pick<T, "querySelector">,

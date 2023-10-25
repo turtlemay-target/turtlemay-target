@@ -2,7 +2,7 @@
  * @file Select and clear input field.
  */
 
-import { querySelectorFirst } from "../lib/util";
+import { querySelectorFirst } from "../lib/dom";
 
 const searchInputSelectors = [
 	`input[data-test="@web/SearchInputOverlayMobile"]`,
