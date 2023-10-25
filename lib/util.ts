@@ -19,7 +19,7 @@ export function waitForElement(selector: string): Promise<Element> {
 			resolve(elem);
 			return;
 		}
-		new MutationObserver((mutationRecords, observer) => {
+		void new MutationObserver((mutationRecords, observer) => {
 			elem ??= document.querySelector(selector);
 			if (elem) {
 				resolve(elem);

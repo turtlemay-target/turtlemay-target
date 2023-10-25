@@ -23,7 +23,7 @@ elem.innerHTML = `
 
 insertFooterElem(elem);
 
-new MutationObserver(() => insertFooterElem(elem))
+void new MutationObserver(() => insertFooterElem(elem))
 	.observe(document.body, { childList: true, subtree: true });
 
 function insertFooterElem(elem: Element) {
