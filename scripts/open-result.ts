@@ -3,6 +3,11 @@
  */
 
 addEventListener("keydown", (event: KeyboardEvent) => {
+	// Ignore while typing in search box.
+	if (document.activeElement?.nodeName === "INPUT") {
+		return;
+	}
+
 	const numberTest = /^[0-9]$/i;
 
 	const locationCheck = (
