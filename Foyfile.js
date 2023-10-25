@@ -13,5 +13,5 @@ task("build", async (ctx) => {
 
 	const outZip = `./dist/${packageJson.name}-${manifestJson.version}.zip`;
 	await ctx.exec(`zip -D -r ${outZip} ./css ./out ./manifest.json`);
-	await fs.copy(outZip, "./dist/${packageJson.name}.zip");
+	await fs.copy(outZip, `./dist/${packageJson.name}.zip`);
 });
