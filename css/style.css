@@ -63,6 +63,18 @@
 	background: rgb(247, 247, 247);
 }
 
+.turtlemay__userBarcodeWidget {
+	margin: 1em 0;
+}
+
+.turtlemay__userBarcodeWidgetBarcodeContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.5em 0.25em;
+	background: rgb(247, 247, 247);
+}
+
 .turtlemay__footerText {
 	color: rgb(199, 250, 170);
 }
