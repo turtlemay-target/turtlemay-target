@@ -25,7 +25,7 @@ const baseConfig = {
 
 const extensionConfig = {
 	name: "extension",
-	entry: "./src/content.ts",
+	entry: "./scripts/content.ts",
 	output: {
 		path: path.resolve(__dirname, "out"),
 		filename: "[name].js",
@@ -34,7 +34,7 @@ const extensionConfig = {
 
 const userscriptConfig = {
 	name: "userscript",
-	entry: "./src/content.ts",
+	entry: "./scripts/content.ts",
 	output: {
 		path: path.resolve(__dirname, "dist"),
 		filename: `${packageJson.name}.user.js`,
