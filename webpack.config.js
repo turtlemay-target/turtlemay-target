@@ -45,7 +45,7 @@ const userscriptConfig = {
 			headers: [{
 				meta: {
 					name: manifestJson.name,
-					namespace: "us.turtlemay.target",
+					namespace: packageJson.repository,
 					description: manifestJson.description,
 					author: manifestJson.author,
 					icon: "https://www.google.com/s2/favicons?sz=64&domain=target.com",
