@@ -30,7 +30,7 @@ function initUserBarcodeWidget() {
 		reactRoot.render(React.createElement(UserBarcodeWidget));
 	}
 	if (!document.body.contains(rootEl)) {
-		const adjacentEl = document.querySelector(`[data-component-title="Product Grid"]`);
+		const adjacentEl = document.querySelector(`#pageBodyContainer, main, [data-component-title="Product Grid"]`);
 		adjacentEl?.insertAdjacentElement("beforebegin", rootEl);
 	}
 }
