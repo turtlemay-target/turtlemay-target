@@ -13,10 +13,8 @@ elem.innerHTML = `
 	<span class="turtlemay__footerText">
 		<a class="Link__StyledLink-sc-4b9qcv-0 ghasId" href="${packageJson.repository}" target="_blank">
 			<span class="turtlemay__footerTextIcon">🧩</span>
-			<span>&nbsp;</span>
 			<span>${manifestJson.name}</span>
 		</a>
-		<span>&nbsp;</span>
 		<span class="turtlemay__footerTextVersion">${manifestJson.version}</span>
 	</span>
 `;
