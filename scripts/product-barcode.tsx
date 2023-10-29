@@ -129,12 +129,21 @@ function BarcodeCanvas(props: { className?: string; itemInfo: IItemInfo | null }
 	]);
 
 	function update() {
-		let format = "code128";
+		const barcodeOpts: JsBarcode.Options = {
+			format: "code128",
+			width: 2,
+			height: 20,
+			margin: 5,
+			displayValue: true,
+			fontSize: 15,
+			background: "transparent",
+		};
+
 		let value: string | undefined;
 
 		if (props.itemInfo?.upc) {
-			if (props.itemInfo.upc.length === 12) format = "upc";
-			if (props.itemInfo.upc.length === 13) format = "ean13";
+			if (props.itemInfo.upc.length === 12) barcodeOpts.format = "upc";
+			if (props.itemInfo.upc.length === 13) barcodeOpts.format = "ean13";
 			value = props.itemInfo.upc;
 		} else if (props.itemInfo?.dpci) {
 			value = props.itemInfo.dpci;
@@ -144,15 +153,7 @@ function BarcodeCanvas(props: { className?: string; itemInfo: IItemInfo | null }
 
 		if (value) {
 			try {
-				JsBarcode(elemRef.current, value, {
-					format: format,
-					width: 2,
-					height: 20,
-					margin: 5,
-					displayValue: true,
-					fontSize: 15,
-					background: "transparent",
-				});
+				JsBarcode(elemRef.current, value, barcodeOpts);
 			} catch (err) {
 				console.error(err);
 			}
