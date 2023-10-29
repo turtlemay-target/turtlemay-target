@@ -62,7 +62,7 @@ function MathWidget() {
 				const changedValue = (
 					v.target.nodeName === "INPUT" &&
 					v.target === document.activeElement &&
-					v.attributeName === "turtlemay-value"
+					v.attributeName === "data-turtlemay-value"
 				);
 
 				if (changedValue) {
@@ -136,6 +136,6 @@ function MathWidget() {
 	/** Set value attribute on input elements to be used by mutation observer. */
 	function onInputCallback(event: Event) {
 		const inputEl = event.target as HTMLInputElement;
-		inputEl.setAttribute("turtlemay-value", inputEl.value);
+		inputEl.setAttribute("data-turtlemay-value", inputEl.value);
 	}
 }
