@@ -1,6 +1,5 @@
 const { fs, task } = require("foy");
 const packageJson = require("./package.json");
-const manifestJson = require("./manifest.json");
 
 task("build", async (ctx) => {
 	await fs.rmrf("./out");
