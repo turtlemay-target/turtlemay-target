@@ -1,7 +1,7 @@
 {
 	"name": "Turtlemay's Target Extension",
 	"author": "Turtlemay",
-	"version": "1.7.0",
+	"version": "1.8.0",
 	"description": "Extension for Target.com",
 	"manifest_version": 3,
 	"content_scripts": [
