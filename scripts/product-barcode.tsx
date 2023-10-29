@@ -156,6 +156,10 @@ function BarcodeCanvas(props: { className?: string; itemInfo: IItemInfo | null }
 				JsBarcode(elemRef.current, value, barcodeOpts);
 			} catch (err) {
 				console.error(err);
+
+				if (barcodeOpts.format !== "code128") {
+					JsBarcode(elemRef.current, value, { ...barcodeOpts, format: "code128" });
+				}
 			}
 		}
 	}
