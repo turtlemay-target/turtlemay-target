@@ -3,7 +3,7 @@
  */
 
 import * as React from "react";
-import JsBarcode from "jsbarcode";
+import QRCode from "qrcode";
 import { Root, createRoot } from "react-dom/client";
 
 let rootEl: HTMLElement | undefined;
@@ -48,7 +48,13 @@ function UserBarcodeWidget() {
 	return (
 		<div className="turtlemay__userBarcodeWidget">
 			<div className="turtlemay__userBarcodeWidgetBarcodeContainer">
-				<Barcode className="turtlemay__userBarcodeWidgetBarcode" value={query} />
+				<div className="turtlemay__userBarcodeWidgetQrResult">
+					<QrcodeCanvas className="turtlemay__userBarcodeWidgetQrCanvas" value={query} />
+					<div className="turtlemay__userBarcodeWidgetQrDetail">
+						<div className="turtlemay__userBarcodeWidgetQrDetailHeader">QR generated for your search:</div>
+						<div className="turtlemay__userBarcodeWidgetQrDetailValue">{query}</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
@@ -73,7 +79,7 @@ function UserBarcodeWidget() {
 	}
 }
 
-function Barcode(props: { className?: string; value: string; }) {
+function QrcodeCanvas(props: { className?: string; value: string; }) {
 	const elemRef = React.createRef<HTMLCanvasElement>();
 
 	React.useEffect(update, [props.value]);
@@ -86,27 +92,10 @@ function Barcode(props: { className?: string; value: string; }) {
 	});
 
 	function update() {
-		let format = "code128";
-
-		if (props.value.match(/(\d{12,13})/)?.[1]) {
-			if (props.value.length === 12) format = "upc";
-			if (props.value.length === 13) format = "ean13";
-		}
-
-		try {
-			JsBarcode(elemRef.current as HTMLCanvasElement, props.value, {
-				format: format,
-				width: 2,
-				height: 15,
-				margin: 5,
-				displayValue: true,
-				fontSize: 15,
-				background: "transparent",
-			});
-		}
-		catch (error) {
-			console.error(error);
-		}
+		QRCode.toCanvas(elemRef.current, props.value, {
+			margin: 0,
+			scale: 3,
+		});
 	}
 }
 

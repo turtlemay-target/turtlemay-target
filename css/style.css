@@ -74,6 +74,21 @@
 	background: rgb(247, 247, 247);
 }
 
+.turtlemay__userBarcodeWidgetQrResult {
+	display: flex;
+	gap: 1em;
+}
+
+.turtlemay__userBarcodeWidgetQrDetailHeader {
+	font-weight: bold !important;
+}
+
+.turtlemay__userBarcodeWidgetQrDetailValue {
+	display: inline-block;
+	max-width: 150px;
+	font: 1em monospace;
+}
+
 .turtlemay__footerText {
 	color: rgb(199, 250, 170);
 }
