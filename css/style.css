@@ -107,17 +107,17 @@
 	animation-duration: 300ms;
 }
 
+.turtlemay__attentionTextAnimation {
+	animation-name: turtlemay-attention-text-animation;
+	animation-duration: 0.5s;
+	animation-iteration-count: 3;
+}
+
 @keyframes turtlemay-enter-animation {
 	from {
 		transform: scale(1.2);
 		opacity: 0;
 	}
-}
-
-.turtlemay__attentionTextAnimation {
-	animation-name: turtlemay-attention-text-animation;
-	animation-duration: 0.5s;
-	animation-iteration-count: 3;
 }
 
 @keyframes turtlemay-attention-text-animation {
