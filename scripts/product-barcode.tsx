@@ -143,7 +143,7 @@ function BarcodeCanvas(props: { className?: string; itemInfo: IItemInfo | null }
 		}
 
 		if (value) {
-			JsBarcode(elemRef.current as HTMLCanvasElement, value, {
+			JsBarcode(elemRef.current, value, {
 				format: format,
 				width: 2,
 				height: 20,
