@@ -1,3 +1,23 @@
+/* ==============================
+   Extension global
+   ============================== */
+
+.turtlemay__enterAnimation {
+	transition-property: all;
+	animation-name: turtlemay-enter-animation;
+	animation-duration: 300ms;
+}
+
+.turtlemay__attentionTextAnimation {
+	animation-name: turtlemay-attention-text-animation;
+	animation-duration: 0.5s;
+	animation-iteration-count: 3;
+}
+
+/* ==============================
+   Math parser
+   ============================== */
+
 .turtlemay__mathWidgetContainer {
 	position: fixed;
 	top: 0;
@@ -34,6 +54,10 @@
 	white-space: pre;
 }
 
+/* ==============================
+   Product barcode
+   ============================== */
+
 .turtlemay__barcodeWidget {
 	margin: 1em 0;
 }
@@ -62,6 +86,10 @@
 	background: rgb(247, 247, 247);
 }
 
+/* ==============================
+   Search results barcode
+   ============================== */
+
 .turtlemay__userBarcodeWidget {
 	margin: 1em 0;
 }
@@ -89,6 +117,10 @@
 	font: 1em monospace;
 }
 
+/* ==============================
+   Site footer
+   ============================== */
+
 .turtlemay__footerText {
 	color: rgb(199, 250, 170);
 }
@@ -101,17 +133,9 @@
 	color: rgb(255, 203, 190);
 }
 
-.turtlemay__enterAnimation {
-	transition-property: all;
-	animation-name: turtlemay-enter-animation;
-	animation-duration: 300ms;
-}
-
-.turtlemay__attentionTextAnimation {
-	animation-name: turtlemay-attention-text-animation;
-	animation-duration: 0.5s;
-	animation-iteration-count: 3;
-}
+/* ==============================
+   Animations
+   ============================== */
 
 @keyframes turtlemay-enter-animation {
 	from {
