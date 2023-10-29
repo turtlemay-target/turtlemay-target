@@ -1,8 +1,15 @@
 # Turtlemay's Target Extension
 
-This script automatically adds a barcode to product pages on [Target.com](https://target.com). Generates UPC when available, falling back to DPCI/TCIN in Code 128 format. Supports items with variations (color, size, count, etc). We also remove some ads and annoyances.
+This script automatically adds a barcode to product pages on [Target.com](https://target.com). Generates UPC, DPCI, and TCIN barcodes for any item, including variations (color, size, count, etc). We also remove some ads and annoyances.
 
-Use number keys on search page to quick select a result. Backtick, Enter, and letter keys automatically focus the search field.
+### Features:
+- Automatically parse and render UPC/DPCI/TCIN barcodes for all product pages.
+- On search pages, automatically generate a QR code of the search term for quick entry into work devices. (This has many uses for those in the know.)
+- Enter math expressions in the search box for quick calculations.
+
+**Shortcuts for keyboard users:**
+
+Use number keys on search page to quick select a result. Backtick and letter keys automatically focus the search field.
 
 ## Requirements
 
@@ -10,7 +17,7 @@ Requires a browser with support for userscripts. Recommend [Kiwi Browser](https:
 
 ## Installation
 
-Our [userscript version](https://turtlemay-target-web.netlify.app/turtlemay-target.user.js) is deployed via netlify. Refer to your userscript manager's documentation for how to install and update scripts (e.g. opening the js file in-browser or placing a copy in your scripts directory).
+Our [userscript](https://turtlemay-target-web.netlify.app/turtlemay-target.user.js) is deployed via netlify. Refer to your userscript manager's documentation for how to install and update scripts (e.g. opening the js file in-browser or placing a copy in your scripts directory).
 
 Alternatively, download [latest extension build](https://turtlemay-target-web.netlify.app/turtlemay-target.zip) to device and load zip file from your browser's extensions UI. Browser must support Chrome extensions.
 
