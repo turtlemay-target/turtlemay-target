@@ -52,6 +52,7 @@ function BarcodeWidget() {
 				</div>
 				<div className="turtlemay__barcodeWidgetBarcodeContainer">
 					<BarcodeCanvas className="turtlemay__barcodeWidgetCanvas turtlemay__enterAnimation" itemInfo={{ [activeItemInfoProp]: itemInfo[activeItemInfoProp] }} />
+					<p className="turtlemay__barcodeWidgetCanvasError">Barcode could not be rendered.</p>
 				</div>
 			</div>
 		);
@@ -115,6 +116,7 @@ function BarcodeWidget() {
 }
 
 function BarcodeCanvas(props: { className?: string; itemInfo: IItemInfo | null }) {
+	const [renderError, setRenderError] = React.useState(false);
 	const elemRef = React.createRef<HTMLCanvasElement>();
 
 	React.useEffect(update, [
@@ -147,14 +149,22 @@ function BarcodeCanvas(props: { className?: string; itemInfo: IItemInfo | null }
 		}
 
 		if (value) {
+			setRenderError(false);
+
 			try {
-				JsBarcode(elemRef.current, value, barcodeOpts);
+				try {
+					JsBarcode(elemRef.current, value, barcodeOpts);
+				} catch (err) {
+					console.error(err);
+
+					if (barcodeOpts.format !== "code128") {
+						JsBarcode(elemRef.current, value, { ...barcodeOpts, format: "code128" });
+					}
+				}
 			} catch (err) {
 				console.error(err);
 
-				if (barcodeOpts.format !== "code128") {
-					JsBarcode(elemRef.current, value, { ...barcodeOpts, format: "code128" });
-				}
+				setRenderError(true);
 			}
 		}
 	}
@@ -165,6 +175,7 @@ function BarcodeCanvas(props: { className?: string; itemInfo: IItemInfo | null }
 		ref: elemRef,
 		onClick: scrollToItemInfo,
 		style: { cursor: "pointer" },
+		"data-turtlemay-canvas-error": renderError,
 	});
 }
 
