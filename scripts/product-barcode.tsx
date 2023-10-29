@@ -51,7 +51,7 @@ function BarcodeWidget() {
 					<BarcodeTab propName="tcin" />
 				</div>
 				<div className="turtlemay__barcodeWidgetBarcodeContainer">
-					<Barcode className="turtlemay__barcodeWidgetBarcode turtlemay__enterAnimation" itemInfo={{ [activeItemInfoProp]: itemInfo[activeItemInfoProp] }} />
+					<BarcodeCanvas className="turtlemay__barcodeWidgetCanvas turtlemay__enterAnimation" itemInfo={{ [activeItemInfoProp]: itemInfo[activeItemInfoProp] }} />
 				</div>
 			</div>
 		);
@@ -119,7 +119,7 @@ function BarcodeWidget() {
 	}
 }
 
-function Barcode(props: { className?: string; itemInfo: IItemInfo | null }) {
+function BarcodeCanvas(props: { className?: string; itemInfo: IItemInfo | null }) {
 	const elemRef = React.createRef<HTMLCanvasElement>();
 
 	React.useEffect(update, [
