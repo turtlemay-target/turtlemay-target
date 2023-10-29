@@ -143,15 +143,19 @@ function BarcodeCanvas(props: { className?: string; itemInfo: IItemInfo | null }
 		}
 
 		if (value) {
-			JsBarcode(elemRef.current, value, {
-				format: format,
-				width: 2,
-				height: 20,
-				margin: 5,
-				displayValue: true,
-				fontSize: 15,
-				background: "transparent",
-			});
+			try {
+				JsBarcode(elemRef.current, value, {
+					format: format,
+					width: 2,
+					height: 20,
+					margin: 5,
+					displayValue: true,
+					fontSize: 15,
+					background: "transparent",
+				});
+			} catch (err) {
+				console.error(err);
+			}
 		}
 	}
 
