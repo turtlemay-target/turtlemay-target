@@ -49,7 +49,7 @@ function UserBarcodeWidget() {
 		<div className="turtlemay__userBarcodeWidget">
 			<div className="turtlemay__userBarcodeWidgetBarcodeContainer">
 				<div className="turtlemay__userBarcodeWidgetQrResult">
-					<QrcodeCanvas className="turtlemay__userBarcodeWidgetQrCanvas" value={query} />
+					<QrcodeCanvas className="turtlemay__userBarcodeWidgetQrCanvas turtlemay__enterAnimation" value={query} />
 					<div className="turtlemay__userBarcodeWidgetQrDetail">
 						<div className="turtlemay__userBarcodeWidgetQrDetailHeader">QR generated for your search:</div>
 						<div className="turtlemay__userBarcodeWidgetQrDetailValue">{query}</div>
@@ -85,7 +85,7 @@ function QrcodeCanvas(props: { className?: string; value: string; }) {
 	React.useEffect(update, [props.value]);
 
 	return React.createElement("canvas", {
-		className: `${props.className ?? ""} turtlemay__enterAnimation`,
+		className: props.className,
 		width: 0, height: 0,
 		key: props.value,
 		ref: elemRef,
