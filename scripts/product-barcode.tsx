@@ -70,7 +70,11 @@ function BarcodeWidget() {
 	}
 
 	function initObserver() {
-		const observer = new MutationObserver((mutations) => {
+		const observer = new MutationObserver(onMutation);
+		observer.observe(document.body, { childList: true, subtree: true, attributes: true, characterData: true });
+		return () => observer.disconnect();
+
+		function onMutation(mutations: MutationRecord[]) {
 			// Detect changed location.
 			if (location.href !== prevLocation.current) {
 				prevLocation.current = location.href;
@@ -106,16 +110,7 @@ function BarcodeWidget() {
 					}
 				}
 			}
-		});
-
-		observer.observe(document.body, {
-			childList: true,
-			subtree: true,
-			attributes: true,
-			characterData: true,
-		});
-
-		return () => observer.disconnect();
+		}
 	}
 }
 
