@@ -67,7 +67,7 @@ function MathWidget() {
 
 				if (changedValue) {
 					const inputEl = v.target as HTMLInputElement;
-					setInputValue(inputEl.value);
+					setInputValue(inputEl.value || "");
 					break;
 				}
 			}
@@ -84,7 +84,7 @@ function MathWidget() {
 			// Assign our input event callback to detect changed value.
 			inputEl.addEventListener("input", onInputCallback);
 
-			setInputValue(inputEl.value);
+			setInputValue(inputEl.value || "");
 
 			if (mathResult) {
 				setActive(true);
