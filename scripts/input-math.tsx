@@ -109,7 +109,7 @@ function MathWidget() {
 		setMathResult("");
 
 		// Check if the string looks like a math expression.
-		if (!inputValue.match(/.*\D+.*/)) {
+		if (!inputValue.match(/\d+\D+\d+/)) {
 			return;
 		}
 
