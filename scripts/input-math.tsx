@@ -78,18 +78,16 @@ function MathWidget() {
 		document.addEventListener("focusin", onFocusIn);
 		return () => document.removeEventListener("focusin", onFocusIn);
 
-		function onFocusIn() {
-			if (document.activeElement?.nodeName === "INPUT") {
-				const inputEl = document.activeElement as HTMLInputElement;
+		function onFocusIn(event: FocusEvent) {
+			const inputEl = event.target as HTMLInputElement;
 
-				// Assign our input event callback to detect changed value.
-				inputEl.addEventListener("input", onInputCallback);
+			// Assign our input event callback to detect changed value.
+			inputEl.addEventListener("input", onInputCallback);
 
-				setInputValue(inputEl.value);
+			setInputValue(inputEl.value);
 
-				if (mathResult) {
-					setActive(true);
-				}
+			if (mathResult) {
+				setActive(true);
 			}
 		}
 	}
