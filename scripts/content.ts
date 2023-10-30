@@ -3,6 +3,7 @@ import "./footer";
 import "./product-barcode";
 import "./result-barcode";
 import "./search-field";
+import "./search-new";
 import "./open-result";
 import "./input-math";
 

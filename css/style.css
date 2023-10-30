@@ -130,6 +130,31 @@
 }
 
 /* ==============================
+   Search new window
+   ============================== */
+
+[data-turtlemay-searchNewWindowLongPressable] {
+	user-select: none;
+}
+
+[data-turtlemay-searchNewWindowLongPressed]::after {
+	content: "↗";
+	position: absolute;
+	top: -5px;
+	right: -5px;
+	width: 20px;
+	height: 20px;
+	font: 20px monospace;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(255, 0, 0, 0.75);
+	color: #fff;
+	border-radius: 50%;
+	pointer-events: none;
+}
+
+/* ==============================
    Site footer
    ============================== */
 
