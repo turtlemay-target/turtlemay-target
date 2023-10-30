@@ -43,7 +43,7 @@ function pointerDownListener(event: PointerEvent) {
 			if (event.target === searchButtonEl && inputEl) {
 				if (Date.now() - pointerDownTime > LONG_PRESS_TIME) {
 					const s = encodeURIComponent(inputEl.value);
-					window.open(`https://www.target.com/s?searchTerm=${s}`);
+					window.open(`https://www.target.com/s?searchTerm=${s}`, "_blank");
 				}
 			}
 		}
