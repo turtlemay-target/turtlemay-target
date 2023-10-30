@@ -1,3 +1,7 @@
+/**
+ * @file Import all of our currently implemented content scripts and stylesheets.
+ */
+
 import "./welcome";
 import "./footer";
 import "./product-barcode";
