@@ -1,11 +1,13 @@
 # Turtlemay's Target Extension
 
-This script automatically adds a barcode to product pages on [Target.com](https://target.com). Generates UPC, DPCI, and TCIN barcodes for any item, including variations (color, size, count, etc). We also remove some ads and annoyances.
+This script adds some convenient shortcuts and features to [Target.com](https://target.com) for Target team members.
 
 ### Features:
-- Automatically parse and render UPC/DPCI/TCIN barcodes for all product pages.
+- Automatically parse and render UPC/DPCI/TCIN barcodes for all product pages, supporting variations (color, size, count, etc).
 - On search pages, automatically generate a QR code of the search term for quick entry into work devices. (This has many uses for those in the know.)
+- Long-press on the search button to open the search in a new window.
 - Enter math expressions in the search box for quick calculations.
+- Removes some ads and annoyances from the site.
 
 **Shortcuts for keyboard users:**
 
