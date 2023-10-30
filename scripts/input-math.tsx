@@ -39,6 +39,7 @@ function MathWidget() {
 	React.useEffect(focusOutListener, []);
 	React.useEffect(changedInputValue, [inputValue]);
 	React.useEffect(changedMathResult, [mathResult]);
+	React.useEffect(updateParent, [active, inputValue]);
 
 	return (
 		<div className="turtlemay__mathWidgetContainer" tabIndex={-1} onClick={() => setActive(false)}>
@@ -79,6 +80,8 @@ function MathWidget() {
 		return () => document.removeEventListener("focusin", onFocusIn);
 
 		function onFocusIn(event: FocusEvent) {
+			updateParent();
+
 			const inputEl = event.target as HTMLInputElement;
 
 			// Assign our input event callback to detect changed value.
@@ -100,6 +103,13 @@ function MathWidget() {
 			if (document.activeElement?.nodeName !== "INPUT") {
 				setActive(false);
 			}
+		}
+	}
+
+	function updateParent() {
+		const newParent = document.activeElement?.parentElement;
+		if (rootEl && newParent && newParent !== rootEl.parentNode) {
+			newParent?.appendChild(rootEl);
 		}
 	}
 
