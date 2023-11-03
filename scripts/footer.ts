@@ -4,32 +4,34 @@
 
 import packageJson from "../package.json";
 import manifestJson from "../manifest.json";
+import { waitForElement } from "../lib/dom";
 
-const elem = document.createElement("p");
+const elem = document.createElement("span");
+elem.className = "turtlemay__footerRoot";
 
-elem.className = "h-padding-r-tight";
+initFooter();
 
-elem.innerHTML = `
-	<span class="turtlemay__footerText">
-		<a class="Link__StyledLink-sc-4b9qcv-0 ghasId" href="${packageJson.repository}" target="_blank">
-			<span class="turtlemay__footerTextIcon">🧩</span>
-			<span>${manifestJson.name}</span>
-		</a>
-		<span class="turtlemay__footerTextVersion">${manifestJson.version}</span>
-	</span>
-`;
-
-insertFooterElem(elem);
-
-void new MutationObserver(() => insertFooterElem(elem))
+void new MutationObserver(initFooter)
 	.observe(document.body, { childList: true, subtree: true });
 
-function insertFooterElem(elem: Element) {
+async function initFooter() {
 	if (!document.body.contains(elem)) {
+		// We will copy our styles from an existing link.
+		const refEl = await waitForElement(`[data-test*="@web/component-footer"] a[href*="terms-conditions"]`);
+
+		elem.innerHTML = `
+			<a class="turtlemay__footerText ${refEl.className}" href="${packageJson.repository}" target="_blank">
+				<span class="turtlemay__footerTextIcon">🧩</span>
+				<span>${manifestJson.name}</span>
+				<span class="turtlemay__footerTextVersion">${manifestJson.version}</span>
+			</a>
+		`;
+
 		const adjacentElem = document.querySelector(
 			'div[data-test="@web/component-footer/SubFooter"] ' +
 			'a[data-test="@web/component-footer/LegalLink"]:last-of-type'
 		);
+
 		adjacentElem?.insertAdjacentElement("afterend", elem);
 	}
 }

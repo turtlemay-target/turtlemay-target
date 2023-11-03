@@ -162,6 +162,11 @@
 	color: rgb(199, 250, 170);
 }
 
+.turtlemay__footerText>*:not(:last-of-type)::after {
+	content: " ";
+	white-space: pre;
+}
+
 .turtlemay__footerTextIcon {
 	filter: grayscale(1) contrast(0) brightness(0) invert(1);
 }
