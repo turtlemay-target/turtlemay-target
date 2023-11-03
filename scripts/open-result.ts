@@ -17,7 +17,7 @@ addEventListener("keydown", (event: KeyboardEvent) => {
 	);
 
 	if (locationCheck && numberTest.test(event.key)) {
-		const elems = document.querySelectorAll<HTMLAnchorElement>('div[class*="StyledCol"]:not(:has(p[data-test="sponsoredText"])) div[class^="ProductCardImage__Content"] a');
+		const elems = document.querySelectorAll<HTMLAnchorElement>('div[class*="StyledCol"] div[class^="ProductCardImage__Content"] a');
 
 		const n = Number(event.key);
 		const i = n === 0 ? 9 : n - 1;
