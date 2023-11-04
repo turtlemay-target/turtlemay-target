@@ -4,7 +4,6 @@
 
 import packageJson from "../package.json";
 import manifestJson from "../manifest.json";
-import { waitForElement } from "../lib/dom";
 
 const elem = document.createElement("span");
 elem.className = "turtlemay__footerRoot";
@@ -17,7 +16,11 @@ void new MutationObserver(initFooter)
 async function initFooter() {
 	if (!document.body.contains(elem)) {
 		// We will copy our styles from an existing link.
-		const refEl = await waitForElement(`[data-test*="@web/component-footer"] a[href*="terms-conditions"]`);
+		const refEl = document.querySelector(`[data-test*="@web/component-footer"] a[href*="terms-conditions"]`);
+
+		if (!refEl) {
+			return;
+		}
 
 		elem.innerHTML = `
 			<a class="turtlemay__footerText ${refEl.className}" href="${packageJson.repository}" target="_blank">
