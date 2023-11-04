@@ -23,7 +23,7 @@ function update() {
 function initUserBarcodeWidget() {
 	if (!rootEl) {
 		rootEl = document.createElement("div");
-		rootEl.className = "turtlemay__userBarcodeWidgetRoot";
+		rootEl.id = "turtlemay__userBarcodeWidgetRoot";
 	}
 	if (!reactRoot) {
 		reactRoot = createRoot(rootEl);

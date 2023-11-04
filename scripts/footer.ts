@@ -6,7 +6,7 @@ import packageJson from "../package.json";
 import manifestJson from "../manifest.json";
 
 const elem = document.createElement("span");
-elem.className = "turtlemay__footerRoot";
+elem.id = "turtlemay__footerRoot";
 
 initFooter();
 

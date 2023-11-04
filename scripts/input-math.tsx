@@ -17,7 +17,7 @@ void new MutationObserver(initMathWidget)
 function initMathWidget() {
 	if (!rootEl) {
 		rootEl = document.createElement("div");
-		rootEl.className = "turtlemay__mathWidgetRoot";
+		rootEl.id = "turtlemay__mathWidgetRoot";
 	}
 	if (!reactRoot) {
 		reactRoot = createRoot(rootEl);
