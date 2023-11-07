@@ -2,6 +2,8 @@
  * @file Long press on the search button to open in a new window.
  */
 
+export { };
+
 const LONG_PRESS_TIME = 500;
 
 addEventListener("pointerdown", pointerDownListener);
