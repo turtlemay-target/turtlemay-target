@@ -13,7 +13,7 @@ initFooter();
 void new MutationObserver(initFooter)
 	.observe(document.body, { childList: true, subtree: true });
 
-async function initFooter() {
+function initFooter() {
 	if (document.body.contains(elem)) {
 		return;
 	}
