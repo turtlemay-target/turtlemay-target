@@ -8,6 +8,7 @@ import "./product-barcode";
 import "./result-barcode";
 import "./search-field";
 import "./search-new";
+import "./input-mode";
 import "./open-result";
 import "./input-math";
 
