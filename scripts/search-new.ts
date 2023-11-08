@@ -2,68 +2,31 @@
  * @file Long press on the search button to open in a new window.
  */
 
-export { };
+import { createLongPointerDownListener } from "../lib/long-press";
 
-const LONG_PRESS_TIME = 500;
+addEventListener("pointerdown", createLongPointerDownListener({
+	longPressableAttr: "data-turtlemay-searchNewWindowLongPressable",
+	longPressedAttr: "data-turtlemay-searchNewWindowLongPressed",
 
-addEventListener("pointerdown", pointerDownListener);
+	longPressableEl: (elem) => ((
+		elem instanceof HTMLButtonElement &&
+		elem.getAttribute("type") === "submit") && (
+			elem.getAttribute("aria-label") === "search" ||
+			elem.getAttribute("data-test") === "@web/SearchButtonOverlayMobile")
+	),
 
-function pointerDownListener(event: PointerEvent) {
-	const pointedSearchButton = ((
-		event.target instanceof HTMLButtonElement &&
-		event.target.getAttribute("type") === "submit") && (
-			event.target.getAttribute("aria-label") === "search" ||
-			event.target.getAttribute("data-test") === "@web/SearchButtonOverlayMobile")
-	);
+	onLongPressed: (elem) => {
+		const inputEl = elem.closest(`form[action="/s"]`)?.querySelector("input");
 
-	if (pointedSearchButton) {
-		const searchButtonEl = event.target as HTMLElement;
-		const inputEl = searchButtonEl.closest(`form[action="/s"]`)?.querySelector("input");
-
-		if (!inputEl) {
-			return;
+		if (inputEl?.value) {
+			const s = encodeURIComponent(inputEl.value);
+			window.open(`https://www.target.com/s?searchTerm=${s}`, "_blank");
+		} else {
+			inputEl?.select();
 		}
 
-		const pointerDownTime = Date.now();
-
-		let longPressTimeout = setTimeout(onLongPressTimeout, LONG_PRESS_TIME);
-
-		searchButtonEl.addEventListener("pointerup", onPointerUp, { once: true });
-		searchButtonEl.addEventListener("pointerout", onPointerOut, { once: true });
-
-		searchButtonEl.setAttribute("data-turtlemay-searchNewWindowLongPressable", "");
-
-		function onLongPressTimeout() {
-			searchButtonEl.setAttribute("data-turtlemay-searchNewWindowLongPressed", "");
-		}
-
-		function onPointerUp(event: PointerEvent) {
-			clearTimeout(longPressTimeout);
-
-			searchButtonEl.removeAttribute("data-turtlemay-searchNewWindowLongPressed");
-
-			if (event.target === searchButtonEl && inputEl) {
-				if (Date.now() - pointerDownTime > LONG_PRESS_TIME) {
-					if (inputEl.value) {
-						const s = encodeURIComponent(inputEl.value);
-						window.open(`https://www.target.com/s?searchTerm=${s}`, "_blank");
-
-						// Prevent activating button.
-						searchButtonEl.setAttribute("disabled", "");
-						requestAnimationFrame(() => searchButtonEl.removeAttribute("disabled"));
-					} else {
-						inputEl.select();
-					}
-				}
-			}
-		}
-
-		function onPointerOut(event: PointerEvent) {
-			if (event.target === searchButtonEl) {
-				clearTimeout(longPressTimeout);
-
-				searchButtonEl.removeAttribute("data-turtlemay-searchNewWindowLongPressed");
-			}
-		}
-	}
-}
+		// Prevent activating button.
+		elem.setAttribute("disabled", "");
+		requestAnimationFrame(() => elem.removeAttribute("disabled"));
+	},
+}));

@@ -2,67 +2,31 @@
  * @file Toggle input mode between number and text.
  */
 
-export { };
+import { createLongPointerDownListener } from "../lib/long-press";
 
-const LONG_PRESS_TIME = 500;
+addEventListener("pointerdown", createLongPointerDownListener({
+	longPressableAttr: "data-turtlemay-inputButtonLongPressable",
+	longPressedAttr: "data-turtlemay-inputButtonLongPressed",
 
-addEventListener("pointerdown", pointerDownListener);
+	longPressableEl: (elem) => (
+		elem instanceof HTMLButtonElement && (
+			elem.getAttribute("aria-label") === "search by voice" ||
+			elem.getAttribute("data-test") === "@web/Search/Microphone")
+	),
 
-function pointerDownListener(event: PointerEvent) {
-	const pointedVoiceButton = (
-		event.target instanceof HTMLButtonElement && (
-			event.target.getAttribute("aria-label") === "search by voice" ||
-			event.target.getAttribute("data-test") === "@web/Search/Microphone")
-	);
+	onLongPressed: (elem) => {
+		const inputEl = elem.closest(`form[action="/s"]`)?.querySelector("input");
 
-	if (pointedVoiceButton) {
-		const voiceButtonEl = event.target as HTMLElement;
-
-		const inputEl = voiceButtonEl.closest(`form[action="/s"]`)?.querySelector("input");
-
-		if (!inputEl) {
-			return;
+		if (inputEl) {
+			toggleInputMode(inputEl);
+			inputEl.select();
 		}
 
-		const pointerDownTime = Date.now();
-
-		let longPressTimeout = setTimeout(onLongPressTimeout, LONG_PRESS_TIME);
-
-		voiceButtonEl.addEventListener("pointerup", onPointerUp, { once: true });
-		voiceButtonEl.addEventListener("pointerout", onPointerOut, { once: true });
-
-		voiceButtonEl.setAttribute("data-turtlemay-inputButtonLongPressable", "");
-
-		function onLongPressTimeout() {
-			voiceButtonEl.setAttribute("data-turtlemay-inputButtonLongPressed", "");
-		}
-
-		function onPointerUp(event: PointerEvent) {
-			clearTimeout(longPressTimeout);
-
-			voiceButtonEl.removeAttribute("data-turtlemay-inputButtonLongPressed");
-
-			if (event.target === voiceButtonEl && inputEl) {
-				if (Date.now() - pointerDownTime > LONG_PRESS_TIME) {
-					toggleInputMode(inputEl);
-					inputEl.select();
-
-					// Prevent activating button.
-					voiceButtonEl.setAttribute("disabled", "");
-					requestAnimationFrame(() => voiceButtonEl.removeAttribute("disabled"));
-				}
-			}
-		}
-
-		function onPointerOut(event: PointerEvent) {
-			if (event.target === voiceButtonEl) {
-				clearTimeout(longPressTimeout);
-
-				voiceButtonEl.removeAttribute("data-turtlemay-inputButtonLongPressed");
-			}
-		}
-	}
-}
+		// Prevent activating button.
+		elem.setAttribute("disabled", "");
+		requestAnimationFrame(() => elem.removeAttribute("disabled"));
+	},
+}));
 
 function toggleInputMode(el: HTMLInputElement) {
 	if (el.inputMode !== "numeric") {
