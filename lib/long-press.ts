@@ -28,6 +28,7 @@ export function createLongPointerDownListener(args: {
 
 		targetEl.addEventListener("pointerup", pointerUpListener, { once: true });
 		targetEl.addEventListener("pointerout", pointerOutListener, { once: true });
+		targetEl.addEventListener("contextmenu", contextMenuListener, { once: true });
 
 		targetEl.classList.add(args.longPressableClass);
 
@@ -53,6 +54,11 @@ export function createLongPointerDownListener(args: {
 
 				targetEl.classList.remove(args.longPressedClass);
 			}
+		}
+
+		function contextMenuListener(ev: MouseEvent) {
+			ev.preventDefault();
+			return false;
 		}
 	};
 }
