@@ -163,7 +163,7 @@
 }
 
 .turtlemay__inputButtonLongPressable--pressed::after {
-	content: "🖮";
+	content: "⌨️";
 	position: absolute;
 	top: -15px;
 	right: -15px;
