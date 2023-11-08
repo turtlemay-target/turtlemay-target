@@ -47,6 +47,10 @@ function pointerDownListener(event: PointerEvent) {
 					if (inputEl.value) {
 						const s = encodeURIComponent(inputEl.value);
 						window.open(`https://www.target.com/s?searchTerm=${s}`, "_blank");
+
+						// Prevent activating button.
+						searchButtonEl.setAttribute("disabled", "");
+						requestAnimationFrame(() => searchButtonEl.removeAttribute("disabled"));
 					} else {
 						inputEl.select();
 					}
