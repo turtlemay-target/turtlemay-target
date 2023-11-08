@@ -80,9 +80,13 @@ function MathWidget() {
 		return () => document.removeEventListener("focusin", onFocusIn);
 
 		function onFocusIn(event: FocusEvent) {
-			updateParent();
+			const inputEl = event.target instanceof HTMLInputElement ? event.target : null;
 
-			const inputEl = event.target as HTMLInputElement;
+			if (!inputEl) {
+				return;
+			}
+
+			updateParent();
 
 			// Assign our input event callback to detect changed value.
 			inputEl.addEventListener("input", onInputCallback);
