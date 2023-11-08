@@ -7,10 +7,10 @@ export function createLongPointerDownListener(args: {
 
 	onLongPressed: (elem: HTMLElement) => void;
 
-	/** Attribute name applied to long-pressable elements. */
-	longPressableAttr: string;
-	/** Attribute name applied while long-press is active. */
-	longPressedAttr: string;
+	/** Class name applied to long-pressable elements. */
+	longPressableClass: string;
+	/** Class name applied while long-press is active. */
+	longPressedClass: string;
 },
 	/** Minimum duration in milliseconds to qualify as long-press. */
 	longPressTime = 500,
@@ -29,16 +29,16 @@ export function createLongPointerDownListener(args: {
 		targetEl.addEventListener("pointerup", pointerUpListener, { once: true });
 		targetEl.addEventListener("pointerout", pointerOutListener, { once: true });
 
-		targetEl.setAttribute(args.longPressableAttr, "");
+		targetEl.classList.add(args.longPressableClass);
 
 		function onLongPressTimeout() {
-			targetEl.setAttribute(args.longPressedAttr, "");
+			targetEl.classList.add(args.longPressedClass);
 		}
 
 		function pointerUpListener(ev: PointerEvent) {
 			clearTimeout(longPressTimeout);
 
-			targetEl.removeAttribute(args.longPressedAttr);
+			targetEl.classList.remove(args.longPressedClass);
 
 			if (ev.target === targetEl) {
 				if (Date.now() - pointerDownTime > longPressTime) {
@@ -51,7 +51,7 @@ export function createLongPointerDownListener(args: {
 			if (ev.target === targetEl) {
 				clearTimeout(longPressTimeout);
 
-				targetEl.removeAttribute(args.longPressedAttr);
+				targetEl.classList.remove(args.longPressedClass);
 			}
 		}
 	};

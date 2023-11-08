@@ -133,11 +133,11 @@
    Search new window
    ============================== */
 
-[data-turtlemay-searchNewWindowLongPressable] {
+.turtlemay__searchNewWindowLongPressable {
 	user-select: none;
 }
 
-[data-turtlemay-searchNewWindowLongPressed]::after {
+.turtlemay__searchNewWindowLongPressable--pressed::after {
 	content: "↗";
 	position: absolute;
 	top: -5px;
@@ -158,11 +158,11 @@
    Input type toggle
    ============================== */
 
-[data-turtlemay-inputButtonLongPressable] {
+.turtlemay__inputButtonLongPressable {
 	user-select: none;
 }
 
-[data-turtlemay-inputButtonLongPressed]::after {
+.turtlemay__inputButtonLongPressable--pressed::after {
 	content: "🖮";
 	position: absolute;
 	top: -15px;

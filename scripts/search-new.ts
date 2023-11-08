@@ -5,8 +5,8 @@
 import { createLongPointerDownListener } from "../lib/long-press";
 
 addEventListener("pointerdown", createLongPointerDownListener({
-	longPressableAttr: "data-turtlemay-searchNewWindowLongPressable",
-	longPressedAttr: "data-turtlemay-searchNewWindowLongPressed",
+	longPressableClass: "turtlemay__searchNewWindowLongPressable",
+	longPressedClass: "turtlemay__searchNewWindowLongPressable--pressed",
 
 	longPressableEl: (elem) => ((
 		elem instanceof HTMLButtonElement &&
