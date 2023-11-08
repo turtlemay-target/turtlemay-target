@@ -30,7 +30,7 @@ addEventListener("pointerdown", createLongPointerDownListener({
 
 function toggleInputMode(el: HTMLInputElement) {
 	if (el.inputMode !== "numeric") {
-		el.inputMode = "numeric"
+		el.inputMode = "numeric";
 	} else {
 		el.inputMode = "text";
 	}
