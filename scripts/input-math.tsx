@@ -113,7 +113,7 @@ function MathWidget() {
 	function updateParent() {
 		const newParent = document.activeElement?.parentElement;
 		if (rootEl && newParent && newParent !== rootEl.parentNode) {
-			newParent?.appendChild(rootEl);
+			newParent.appendChild(rootEl);
 		}
 	}
 
