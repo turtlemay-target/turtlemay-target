@@ -3,7 +3,7 @@
 	"name": "turtlemay-target",
 	"repository": "https://github.com/turtlemay-target/turtlemay-target",
 	"scripts": {
-		"start": "webpack watch --mode development",
+		"start": "foy dev",
 		"build": "foy build"
 	},
 	"devDependencies": {
