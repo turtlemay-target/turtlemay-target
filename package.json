@@ -17,11 +17,11 @@
 		"foy": "^0.2.20",
 		"style-loader": "^3.3.3",
 		"terser-webpack-plugin": "^5.3.9",
-		"tiny-webpack-userscript-plugin": "^1.1.0",
 		"ts-loader": "^9.5.0",
 		"typescript": "^5.2.2",
 		"webpack": "^5.89.0",
-		"webpack-cli": "^5.1.4"
+		"webpack-cli": "^5.1.4",
+		"webpack-userscript": "^3.2.2"
 	},
 	"dependencies": {
 		"jsbarcode": "^3.11.5",

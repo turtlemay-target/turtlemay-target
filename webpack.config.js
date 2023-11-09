@@ -1,5 +1,5 @@
 const path = require("path");
-const { TinyWebpackUserscriptPlugin } = require("tiny-webpack-userscript-plugin");
+const { UserscriptPlugin } = require("webpack-userscript");
 const manifestJson = require("./manifest.json");
 const packageJson = require("./package.json");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -41,19 +41,16 @@ module.exports = (env, argv) => {
 			filename: `${packageJson.name}.user.js`,
 		},
 		plugins: [
-			new TinyWebpackUserscriptPlugin({
-				scriptName: `${packageJson.name}-${manifestJson.version}`,
-				headers: [{
-					meta: {
-						name: manifestJson.name,
-						namespace: packageJson.repository,
-						description: manifestJson.description,
-						author: manifestJson.author,
-						icon: "https://www.google.com/s2/favicons?sz=64&domain=target.com",
-						version: manifestJson.version,
-						match: "https://*.target.com/*",
-					},
-				}],
+			new UserscriptPlugin({
+				headers: {
+					name: argv.mode === "development" ? `${manifestJson.name} (Dev)` : manifestJson.name,
+					version: argv.mode === "development" ? `${manifestJson.version}-a.[buildTime]` : manifestJson.version,
+					description: manifestJson.description,
+					author: manifestJson.author,
+					namespace: packageJson.repository,
+					match: "https://*.target.com/*",
+					icon: "https://www.google.com/s2/favicons?sz=64&domain=target.com",
+				},
 			}),
 		],
 	};
