@@ -93,6 +93,7 @@ function QrcodeCanvas(props: { className?: string; value: string; }) {
 
 	function update() {
 		QRCode.toCanvas(elemRef.current, props.value, {
+			color: { dark: "#000", light: "#0000" },
 			margin: 0,
 			scale: 3,
 		});
