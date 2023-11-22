@@ -1,3 +1,101 @@
 /**
  * Hide some annoying elements.
  */
+
+ /* Site top banner Target promo, circa 2023-11-22. */
+div[data-test="globalBannerContainer"]:has(button[aria-label="Close"]) {
+	display: none;
+}
+
+/* Site "baseboard" drawer Google ad, circa 2023-11-22. */
+div[data-test="@web/baseboardAd"] {
+	display: none;
+}
+
+/* Site email signup, circa 2023-11-22. */
+div:has(>h3[class*=SignUpHeading]):has(>form) {
+	display: none;
+}
+
+/* Search results Target promo, circa 2023-11-22. */
+div[data-component-id="WEB-369040"]:has(div[data-test="@web/SlingshotComponents/Superhero"]) {
+	display: none;
+}
+
+/* Top of search results Google ad, circa 2023-11-22. */
+main:has(div[data-component-title="Product Grid"]) div[data-component-title="Page Title"]~div[data-component-title="Roundel"]:has(div[class*="PubAdWrapper"]) {
+	display: none;
+}
+
+/* Search results interstitial Google ad, circa 2023-11-22. */
+div[data-component-title="Product Grid"] div[class*="styles__StyledCol"]:has(div[class*="PubAdWrapper"]) {
+	display: none;
+}
+
+/* Bottom of search results Google ad, circa 2023-11-22. */
+main:has(div[data-component-title="Product Grid"]) div[data-test="adContainer"]:last-child {
+	display: none;
+}
+
+/* Search results recommendations, circa 2023-11-22. */
+div[data-component-title="SLP Recommendations"] {
+	display: none;
+}
+
+/* Top of product page Google ad, circa 2023-11-22. */
+main[aria-labelledby="pdp-product-title-id"]>div>div>div[class*="PubAdWrapper"]:first-child {
+	display: none;
+
+	&+[data-test="sponsored-text"] {
+		display: none;
+	}
+}
+
+/* Product page add to cart Google ad, circa 2023-11-22. */
+main[aria-labelledby="pdp-product-title-id"] div[class*="AddToCartContainer"]>div[class*="PubAdWrapper"] {
+	display: none;
+
+	&+[data-test="sponsored-text"] {
+		display: none;
+	}
+}
+
+/* Product page after item details Google ad, circa 2023-11-22. */
+main[aria-labelledby="pdp-product-title-id"] div[aria-labelledby="below-the-fold-heading"] h2+button+div[class*="PubAdWrapper"] {
+	display: none;
+
+	&+[data-test="sponsored-text"] {
+		display: none;
+	}
+}
+
+/* Bottom of product page Google ad, circa 2023-11-22. */
+main[aria-labelledby="pdp-product-title-id"] div[aria-labelledby="below-the-fold-heading"] div[data-test="adContainer"]:last-child {
+	display: none;
+}
+
+/* Bottom of cart page Google ad, circa 2023-11-22. */
+#cart-container:has(>div[class*="PubAdWrapper"]) {
+	&>div[class*="PubAdWrapper"] {
+		display: none;
+	}
+
+	&>[data-test="sponsored-text"] {
+		display: none;
+	}
+}
+
+/* Product chat button, circa 2023-11-22. */
+div[class*="FixedContainer"]:has(>button[data-test="ctaButton"]) {
+	display: none;
+}
+
+/* General fallback, good chance this catches most external ads. */
+#adContainer, [aria-label="Advertisement"],
+div[class*="PubAdWrapper"]:has(#adContainer, [aria-label="Advertisement"]) {
+	display: none;
+
+	&+[data-test="sponsored-text"] {
+		display: none;
+	}
+}
