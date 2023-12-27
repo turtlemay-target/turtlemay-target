@@ -2,6 +2,8 @@
  * @file Use number keys to select search result.
  */
 
+export { };
+
 addEventListener("keydown", (event: KeyboardEvent) => {
 	// Ignore while typing in search box.
 	if (document.activeElement?.nodeName === "INPUT") {
