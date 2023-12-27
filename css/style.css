@@ -184,6 +184,19 @@ form:has(button[data-test="@web/Search/Microphone"]) input[inputmode="numeric"] 
 }
 
 /* ==============================
+   Clipboard button
+   ============================== */
+
+.turtlemay__clipboardButton {
+	filter: grayscale(1);
+	user-select: none;
+}
+
+.turtlemay__clipboardButtonIcon {
+	padding: 0 0.5em;
+}
+
+/* ==============================
    Site footer
    ============================== */
 
