@@ -11,6 +11,7 @@ import "./search-new";
 import "./input-mode";
 import "./open-result";
 import "./input-math";
+import "./multi-query";
 
 import "../css/style.css";
 import "../css/cleanup.css";

@@ -6,6 +6,7 @@ This script adds some convenient shortcuts and features to [Target.com](https://
 - Automatically parse and render UPC/DPCI/TCIN barcodes for all product pages, supporting variations (color, size, count, etc).
 - On search pages, automatically generate a QR code of the search term for quick entry into work devices. (This has many uses for those in the know.)
 - Long-press on the search button to open the search in a new window. (Must allow pop-ups.)
+- Enter multiple search queries separated by semicolons to open them all in new windows. (Must allow pop-ups.)
 - Long-press on the voice search button to toggle number/text input mode for mobile.
 - Enter math expressions in the search box for quick calculations.
 - Removes some ads and annoyances from the site.
