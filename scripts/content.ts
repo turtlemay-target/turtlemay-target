@@ -4,6 +4,8 @@
 
 import "./welcome";
 import "./footer";
+import "./dashboard";
+import "./dashboard-button";
 import "./product-barcode";
 import "./result-barcode";
 import "./search-field";
