@@ -57,8 +57,10 @@ export function createLongPointerDownListener(args: {
 		}
 
 		function contextMenuListener(ev: MouseEvent) {
-			ev.preventDefault();
-			return false;
+			// Prevent context menu initiated by touch or primary button.
+			if (ev.button < 1) {
+				ev.preventDefault();
+			}
 		}
 	};
 }
