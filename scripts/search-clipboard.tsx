@@ -14,6 +14,11 @@ function initClipboardButton() {
 		return;
 	}
 
+	// Only render when product search box is present.
+	if (!document.querySelector(`form[action="/s"]`)) {
+		return;
+	}
+
 	// We will copy styles from an existing element.
 	const refEl = document.querySelector(`#headerPrimary [data-test="@web/CartLink"]`);
 
