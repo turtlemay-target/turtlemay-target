@@ -8,12 +8,12 @@ const INPUT_DELAY = 800;
 let rootEl: HTMLElement | undefined;
 let reactRoot: Root | undefined;
 
-initTurtlemay();
+initDashboard();
 
-void new MutationObserver(initTurtlemay)
+void new MutationObserver(initDashboard)
 	.observe(document.body, { childList: true, subtree: true });
 
-function initTurtlemay() {
+function initDashboard() {
 	if (!rootEl) {
 		rootEl = document.createElement("div");
 		rootEl.id = "turtlemay__dashRoot";
