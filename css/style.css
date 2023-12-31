@@ -338,6 +338,7 @@ form:has(button[data-test="@web/Search/Microphone"]) input[inputmode="numeric"] 
 }
 
 .turtlemay__dashResultDatabarCanvas {
+	image-rendering: pixelated;
 	box-sizing: content-box;
 	position: relative;
 	background: #fff;
