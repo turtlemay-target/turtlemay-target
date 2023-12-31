@@ -247,13 +247,10 @@ form:has(button[data-test="@web/Search/Microphone"]) input[inputmode="numeric"] 
 }
 
 .turtlemay__dashTopBar {
-	background: #222;
-}
-
-.turtlemay__dashTopBar {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background: #222;
 }
 
 .turtlemay__dashTopBarInput {
@@ -331,9 +328,6 @@ form:has(button[data-test="@web/Search/Microphone"]) input[inputmode="numeric"] 
 
 .turtlemay__dashResultDatabarCanvas {
 	box-sizing: content-box;
-}
-
-.turtlemay__dashResultDatabarCanvas {
 	position: relative;
 	background: #fff;
 	border-left: 4px solid #888;
