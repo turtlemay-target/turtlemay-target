@@ -33,7 +33,7 @@ function Dashboard() {
 	const [inputValue, setInputValue] = React.useState("");
 	const [commitedInputValue, setCommitedInputValue] = React.useState(inputValue);
 	const [isTyping, setIsTyping] = React.useState(false);
-	const [renderResults, setRenderResults] = React.useState<JSX.Element[]>([]);
+	const [renderContent, setRenderContent] = React.useState<JSX.Element[]>([]);
 
 	const widgetElRef = React.useRef<HTMLDivElement | null>(null);
 	const inputElRef = React.useRef<HTMLInputElement | null>(null);
@@ -99,9 +99,9 @@ function Dashboard() {
 				<div className="turtlemay__dashTopBarButton" onClick={handleClickClose}>×</div>
 			</div>
 			<div className="turtlemay__dashContent">
-				{renderResults.length > 0 && (
+				{renderContent.length > 0 && (
 					<div className="turtlemay__renderResults">
-						{renderResults}
+						{renderContent}
 					</div>
 				)}
 			</div>
@@ -150,7 +150,7 @@ function Dashboard() {
 					possibleItemValues.push(`${subStr1}${i}${subStr2}`);
 				}
 
-				setRenderResults(possibleItemValues.map((v, i) => {
+				setRenderContent(possibleItemValues.map((v, i) => {
 					return React.createElement(DashResult, {
 						key: `${v}#${i}`,
 						value: v,
@@ -169,7 +169,7 @@ function Dashboard() {
 					.map(v => v.trim())
 					.filter(v => v.length > 0)
 			);
-			setRenderResults(splitInputs.map((v, i) => {
+			setRenderContent(splitInputs.map((v, i) => {
 				return React.createElement(DashResult, {
 					key: `${v}#${i}`,
 					value: v,
