@@ -137,6 +137,32 @@ function Dashboard() {
 	}
 
 	function onCommitedInput() {
+		// Process all possibilties for an unknown digit.
+		if (commitedInputValue) {
+			const matchGuessDigitQuery = commitedInputValue.match(/^(\d*)\?(\d)*$/);
+
+			if (matchGuessDigitQuery) {
+				const possibleItemValues: string[] = [];
+
+				for (let i = 0; i <= 9; i++) {
+					const subStr1 = matchGuessDigitQuery[1] ?? "";
+					const subStr2 = matchGuessDigitQuery[2] ?? "";
+					possibleItemValues.push(`${subStr1}${i}${subStr2}`);
+				}
+
+				setRenderResults(possibleItemValues.map((v, i) => {
+					return React.createElement(DashResult, {
+						key: `${v}#${i}`,
+						value: v,
+						ordinal: i,
+					});
+				}));
+
+				return;
+			}
+		}
+
+		// Process all queries.
 		if (commitedInputValue) {
 			const splitInputs = (
 				commitedInputValue.split(QUERY_SEPARATOR)
