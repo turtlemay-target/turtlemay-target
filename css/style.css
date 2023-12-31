@@ -318,6 +318,10 @@ form:has(button[data-test="@web/Search/Microphone"]) input[inputmode="numeric"] 
 	font: 1em sans-serif;
 	padding: 2em;
 	min-width: 0;
+
+	&:empty {
+		display: none;
+	}
 }
 
 .turtlemay__dashResult {

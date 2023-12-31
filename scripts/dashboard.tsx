@@ -90,11 +90,13 @@ function Dashboard() {
 				<div className="turtlemay__dashTopBarButton" onClick={handleClickReset}>↺</div>
 				<div className="turtlemay__dashTopBarButton" onClick={handleClickClose}>×</div>
 			</div>
-			{renderResults.length > 0 && (
-				<div className="turtlemay__dashContent">
-					{renderResults}
-				</div>
-			)}
+			<div className="turtlemay__dashContent">
+				{renderResults.length > 0 && (
+					<div className="turtlemay__renderResults">
+						{renderResults}
+					</div>
+				)}
+			</div>
 		</div>
 	);
 
