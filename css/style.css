@@ -319,11 +319,14 @@ form:has(button[data-test="@web/Search/Microphone"]) input[inputmode="numeric"] 
 	&:empty {
 		display: none;
 	}
+
+	& > * {
+		margin: 0 0 2em;
+	}
 }
 
 .turtlemay__dashResult {
 	text-align: right;
-	margin: 0 0 2em;
 }
 
 .turtlemay__dashResultDatabarCanvas {
