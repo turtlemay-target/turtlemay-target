@@ -99,11 +99,7 @@ function Dashboard() {
 				<div className="turtlemay__dashTopBarButton" onClick={handleClickClose}>×</div>
 			</div>
 			<div className="turtlemay__dashContent">
-				{renderContent.length > 0 && (
-					<div className="turtlemay__renderResults">
-						{renderContent}
-					</div>
-				)}
+				{renderContent.length > 0 && renderContent}
 			</div>
 		</div>
 	);
