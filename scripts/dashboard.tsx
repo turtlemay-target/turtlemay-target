@@ -68,9 +68,11 @@ function Dashboard() {
 					setWidgetActive(false);
 					return;
 				}
-				if (event.key === "Enter") {
-					setInputValue("");
-					return;
+				if (document.activeElement instanceof HTMLInputElement) {
+					if (event.key === "Enter") {
+						setInputValue("");
+						return;
+					}
 				}
 			}
 		}
