@@ -146,13 +146,17 @@ function Dashboard() {
 					possibleItemValues.push(`${subStr1}${i}${subStr2}`);
 				}
 
-				setRenderContent(possibleItemValues.map((v, i) => {
+				setRenderContent([(
+					<div className="turtlemay__dashContentTip" key={commitedInputValue}>
+						Rendering all possible values for your missing digit.
+					</div>
+				), ...possibleItemValues.map((v, i) => {
 					return React.createElement(DashResult, {
 						key: `${v}#${i}`,
 						value: v,
 						ordinal: i,
 					});
-				}));
+				})]);
 
 				return;
 			}

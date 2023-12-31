@@ -325,6 +325,14 @@ form:has(button[data-test="@web/Search/Microphone"]) input[inputmode="numeric"] 
 	}
 }
 
+.turtlemay__dashContentTip {
+	font: italic 1em sans-serif;
+	color: #666;
+	background: #000;
+	border-radius: 10px;
+	padding: 1em;
+}
+
 .turtlemay__dashResult {
 	text-align: right;
 }
