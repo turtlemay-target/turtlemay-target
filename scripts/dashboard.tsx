@@ -2,6 +2,7 @@ import * as React from "react";
 import QRCode from "qrcode";
 import { Root, createRoot } from "react-dom/client";
 
+const RESET_KEY = "`";
 const QUERY_SEPARATOR = ";";
 const INPUT_DELAY = 800;
 
@@ -64,6 +65,13 @@ function Dashboard() {
 
 		function handleKey(event: KeyboardEvent) {
 			if (widgetActive && widgetElRef.current?.contains(document.activeElement)) {
+				if (event.key === RESET_KEY) {
+					setInputValue("");
+					setCommitedInputValue("");
+					inputElRef.current?.scrollIntoView({ behavior: "smooth" });
+					inputElRef.current?.select();
+					return;
+				}
 				if (event.key === "Escape") {
 					setWidgetActive(false);
 					return;
