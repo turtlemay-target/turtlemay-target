@@ -238,12 +238,12 @@ form:has(button[data-test="@web/Search/Microphone"]) input[inputmode="numeric"] 
 	background: #111;
 	transition: all 200ms;
 	font: 16px sans-serif;
-}
 
-.turtlemay__dash:not([data-turtlemay-active="true"]) {
-	height: 0;
-	opacity: 0;
-	pointer-events: none;
+	&:not([data-turtlemay-active="true"]) {
+		height: 0;
+		opacity: 0;
+		pointer-events: none;
+	}
 }
 
 .turtlemay__dashTopBar {
@@ -284,11 +284,11 @@ form:has(button[data-test="@web/Search/Microphone"]) input[inputmode="numeric"] 
 	transition: all 200ms;
 	cursor: pointer;
 	user-select: none;
-}
 
-.turtlemay__dashTopBarButton:active {
-	filter: brightness(1.5);
-	transform: scale(0.9);
+	&:active {
+		filter: brightness(1.5);
+		transform: scale(0.9);
+	}
 }
 
 .turtlemay__dashInputSpinnerContainer {
@@ -307,10 +307,10 @@ form:has(button[data-test="@web/Search/Microphone"]) input[inputmode="numeric"] 
 	animation: turtlemay-spin-animation 1s linear infinite;
 	transition: all 200ms;
 	pointer-events: none;
-}
 
-.turtlemay__dashInputSpinner:not([data-turtlemay-active="true"]) {
-	opacity: 0;
+	&:not([data-turtlemay-active="true"]) {
+		opacity: 0;
+	}
 }
 
 .turtlemay__dashContent {
@@ -362,10 +362,10 @@ form:has(button[data-test="@web/Search/Microphone"]) input[inputmode="numeric"] 
 	transition: all 200ms;
 	text-decoration: none;
 	border-bottom: 2px solid #444;
-}
 
-.turtlemay__dashResultInfo a:active {
-	filter: brightness(0.5);
+	&:active {
+		filter: brightness(0.5);
+	}
 }
 
 .turtlemay__dashResultInfo ul {
