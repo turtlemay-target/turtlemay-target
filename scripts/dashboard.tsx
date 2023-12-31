@@ -52,6 +52,7 @@ function Dashboard() {
 			const clickedEl = event.target as HTMLElement;
 			if (clickedEl.closest("[data-turtlemay-dashboard-opener]")) {
 				setWidgetActive(true);
+				inputElRef.current?.scrollIntoView({ behavior: "smooth" });
 				inputElRef.current?.select();
 			}
 		}
