@@ -39,41 +39,29 @@ function Dashboard() {
 	const isTypingTimeout = React.useRef<number | undefined>();
 	const commitInputTimeout = React.useRef<number | undefined>();
 
-	React.useEffect(initClickListener, []);
 	React.useEffect(initKeyListener, [widgetActive, inputValue]);
 	React.useEffect(onChangedWidgetActive, [widgetActive]);
 	React.useEffect(onChangedInputValue, [inputValue]);
 	React.useEffect(onCommitedInput, [commitedInputValue]);
 
 	return (
-		<div className="turtlemay__dash" ref={widgetElRef} data-turtlemay-active={widgetActive} tabIndex={1}>
-			<div className="turtlemay__dashTopBar">
-				<div className="turtlemay__dashTopBarInput turtlemay__dashInputSpinnerContainer">
-					<div className="turtlemay__dashInputSpinner" data-turtlemay-active={isTyping}></div>
-					<input type="text" ref={inputElRef} value={inputValue} onChange={handleChangeInput} placeholder="Enter query" spellCheck="false" />
+		<React.Fragment>
+			<DashboardOpener selector="[data-turtlemay-dashboard-opener]" onClick={openDashboard} />
+			<div className="turtlemay__dash" ref={widgetElRef} data-turtlemay-active={widgetActive} tabIndex={1}>
+				<div className="turtlemay__dashTopBar">
+					<div className="turtlemay__dashTopBarInput turtlemay__dashInputSpinnerContainer">
+						<div className="turtlemay__dashInputSpinner" data-turtlemay-active={isTyping}></div>
+						<input type="text" ref={inputElRef} value={inputValue} onChange={handleChangeInput} placeholder="Enter query" spellCheck="false" />
+					</div>
+					<div className="turtlemay__dashTopBarButton" onClick={handleClickReset}>↺</div>
+					<div className="turtlemay__dashTopBarButton" onClick={handleClickClose}>×</div>
 				</div>
-				<div className="turtlemay__dashTopBarButton" onClick={handleClickReset}>↺</div>
-				<div className="turtlemay__dashTopBarButton" onClick={handleClickClose}>×</div>
+				<div className="turtlemay__dashContent">
+					{renderContent}
+				</div>
 			</div>
-			<div className="turtlemay__dashContent">
-				{renderContent}
-			</div>
-		</div>
+		</React.Fragment>
 	);
-
-	function initClickListener() {
-		addEventListener("click", handleClick);
-		return () => removeEventListener("click", handleClick);
-
-		function handleClick(event: MouseEvent) {
-			const clickedEl = event.target as HTMLElement;
-			if (clickedEl.closest("[data-turtlemay-dashboard-opener]")) {
-				setWidgetActive(true);
-				inputElRef.current?.scrollIntoView({ behavior: "smooth" });
-				inputElRef.current?.select();
-			}
-		}
-	}
 
 	function initKeyListener() {
 		addEventListener("keydown", handleKey);
@@ -137,6 +125,12 @@ function Dashboard() {
 				}
 			}
 		}
+	}
+
+	function openDashboard() {
+		setWidgetActive(true);
+		inputElRef.current?.scrollIntoView({ behavior: "smooth" });
+		inputElRef.current?.select();
 	}
 
 	function resetInput(str: string, el: HTMLInputElement | null) {
@@ -225,6 +219,27 @@ function DashResult(props: { className?: string; value: string; ordinal?: number
 			margin: 0,
 			scale: 3,
 		});
+	}
+}
+
+function DashboardOpener(props: {
+	selector: string,
+	onClick: VoidFunction,
+}) {
+	React.useEffect(initClickListener, []);
+
+	return null;
+
+	function initClickListener() {
+		addEventListener("click", handleClick);
+		return () => removeEventListener("click", handleClick);
+	}
+
+	function handleClick(event: MouseEvent) {
+		const clickedEl = event.target as HTMLElement;
+		if (clickedEl.closest(props.selector)) {
+			props.onClick();
+		}
 	}
 }
 
