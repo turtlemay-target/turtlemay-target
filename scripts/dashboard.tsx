@@ -33,7 +33,7 @@ function Dashboard() {
 	const [inputValue, setInputValue] = React.useState("");
 	const [commitedInputValue, setCommitedInputValue] = React.useState(inputValue);
 	const [isTyping, setIsTyping] = React.useState(false);
-	const [renderContent, setRenderContent] = React.useState<JSX.Element[]>([]);
+	const [renderContent, setRenderContent] = React.useState<JSX.Element | null>(null);
 
 	const widgetElRef = React.useRef<HTMLDivElement | null>(null);
 	const inputElRef = React.useRef<HTMLInputElement | null>(null);
@@ -99,7 +99,7 @@ function Dashboard() {
 				<div className="turtlemay__dashTopBarButton" onClick={handleClickClose}>×</div>
 			</div>
 			<div className="turtlemay__dashContent">
-				{renderContent.length > 0 && renderContent}
+				{renderContent}
 			</div>
 		</div>
 	);
@@ -146,17 +146,16 @@ function Dashboard() {
 					possibleItemValues.push(`${subStr1}${i}${subStr2}`);
 				}
 
-				setRenderContent([(
-					<div className="turtlemay__dashContentTip" key={commitedInputValue}>
-						Rendering all possible values for your missing digit.
-					</div>
-				), ...possibleItemValues.map((v, i) => {
-					return React.createElement(DashResult, {
-						key: `${v}#${i}`,
-						value: v,
-						ordinal: i,
-					});
-				})]);
+				setRenderContent(
+					<React.Fragment>
+						<div className="turtlemay__dashContentTip" key={commitedInputValue}>
+							Rendering all possible values for your missing digit.
+						</div>
+						{...possibleItemValues.map((v, i) => (
+							<DashResult key={`${v}#${i}`} value={v} ordinal={i} />
+						))}
+					</React.Fragment>
+				);
 
 				return;
 			}
@@ -169,13 +168,14 @@ function Dashboard() {
 					.map(v => v.trim())
 					.filter(v => v.length > 0)
 			);
-			setRenderContent(splitInputs.map((v, i) => {
-				return React.createElement(DashResult, {
-					key: `${v}#${i}`,
-					value: v,
-					ordinal: splitInputs.length > 1 ? i : undefined,
-				});
-			}));
+
+			setRenderContent(
+				<React.Fragment>
+					{splitInputs.map((v, i) => (
+						<DashResult key={`${v}#${i}`} value={v} ordinal={splitInputs.length > 1 ? i : undefined} />
+					))}
+				</React.Fragment>
+			);
 		}
 	}
 
