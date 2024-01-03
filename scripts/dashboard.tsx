@@ -39,11 +39,29 @@ function Dashboard() {
 	const isTypingTimeout = React.useRef<number | undefined>();
 	const commitInputTimeout = React.useRef<number | undefined>();
 
+	React.useEffect(initClickListener, []);
+	React.useEffect(initKeyListener, [widgetActive, inputValue]);
 	React.useEffect(onChangedWidgetActive, [widgetActive]);
 	React.useEffect(onChangedInputValue, [inputValue]);
 	React.useEffect(onCommitedInput, [commitedInputValue]);
 
-	React.useEffect(function initClickListener() {
+	return (
+		<div className="turtlemay__dash" ref={widgetElRef} data-turtlemay-active={widgetActive} tabIndex={1}>
+			<div className="turtlemay__dashTopBar">
+				<div className="turtlemay__dashTopBarInput turtlemay__dashInputSpinnerContainer">
+					<div className="turtlemay__dashInputSpinner" data-turtlemay-active={isTyping}></div>
+					<input type="text" ref={inputElRef} value={inputValue} onChange={handleChangeInput} placeholder="Enter query" spellCheck="false" />
+				</div>
+				<div className="turtlemay__dashTopBarButton" onClick={handleClickReset}>↺</div>
+				<div className="turtlemay__dashTopBarButton" onClick={handleClickClose}>×</div>
+			</div>
+			<div className="turtlemay__dashContent">
+				{renderContent}
+			</div>
+		</div>
+	);
+
+	function initClickListener() {
 		addEventListener("click", handleClick);
 		return () => removeEventListener("click", handleClick);
 
@@ -55,9 +73,9 @@ function Dashboard() {
 				inputElRef.current?.select();
 			}
 		}
-	}, []);
+	}
 
-	React.useEffect(function initKeyListener() {
+	function initKeyListener() {
 		addEventListener("keydown", handleKey);
 		return () => removeEventListener("keydown", handleKey);
 
@@ -79,26 +97,7 @@ function Dashboard() {
 				}
 			}
 		}
-	}, [
-		widgetActive,
-		inputValue,
-	]);
-
-	return (
-		<div className="turtlemay__dash" ref={widgetElRef} data-turtlemay-active={widgetActive} tabIndex={1}>
-			<div className="turtlemay__dashTopBar">
-				<div className="turtlemay__dashTopBarInput turtlemay__dashInputSpinnerContainer">
-					<div className="turtlemay__dashInputSpinner" data-turtlemay-active={isTyping}></div>
-					<input type="text" ref={inputElRef} value={inputValue} onChange={handleChangeInput} placeholder="Enter query" spellCheck="false" />
-				</div>
-				<div className="turtlemay__dashTopBarButton" onClick={handleClickReset}>↺</div>
-				<div className="turtlemay__dashTopBarButton" onClick={handleClickClose}>×</div>
-			</div>
-			<div className="turtlemay__dashContent">
-				{renderContent}
-			</div>
-		</div>
-	);
+	}
 
 	function handleChangeInput(event: React.ChangeEvent<HTMLInputElement>) {
 		setInputValue(event.target.value);
