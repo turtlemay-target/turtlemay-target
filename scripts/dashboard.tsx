@@ -126,49 +126,16 @@ function Dashboard() {
 	}
 
 	function onCommitedInput() {
-		// Process all possibilties for an unknown digit.
 		if (commitedInputValue) {
-			const matchGuessDigitQuery = commitedInputValue.match(/^(\d*)\?(\d)*$/);
-
-			if (matchGuessDigitQuery) {
-				const possibleItemValues: string[] = [];
-
-				for (let i = 0; i <= 9; i++) {
-					const subStr1 = matchGuessDigitQuery[1] ?? "";
-					const subStr2 = matchGuessDigitQuery[2] ?? "";
-					possibleItemValues.push(`${subStr1}${i}${subStr2}`);
+			for (const v of [
+				renderGuessDigitQuery(commitedInputValue),
+				renderMultiQuery(commitedInputValue),
+			]) {
+				if (v) {
+					setRenderContent(v);
+					break;
 				}
-
-				setRenderContent(
-					<React.Fragment>
-						<div className="turtlemay__dashContentTip" key={commitedInputValue}>
-							Rendering all possible values for your missing digit.
-						</div>
-						{...possibleItemValues.map((v, i) => (
-							<DashResult key={`${v}#${i}`} value={v} ordinal={i} />
-						))}
-					</React.Fragment>
-				);
-
-				return;
 			}
-		}
-
-		// Process all queries.
-		if (commitedInputValue) {
-			const splitInputs = (
-				commitedInputValue.split(QUERY_SEPARATOR)
-					.map(v => v.trim())
-					.filter(v => v.length > 0)
-			);
-
-			setRenderContent(
-				<React.Fragment>
-					{splitInputs.map((v, i) => (
-						<DashResult key={`${v}#${i}`} value={v} ordinal={splitInputs.length > 1 ? i : undefined} />
-					))}
-				</React.Fragment>
-			);
 		}
 	}
 
@@ -187,6 +154,48 @@ function Dashboard() {
 	function commitInput() {
 		setCommitedInputValue(inputValue);
 	}
+}
+
+function renderGuessDigitQuery(str: string) {
+	const matchGuessDigitQuery = str.match(/^(\d*)\?(\d)*$/);
+
+	if (!matchGuessDigitQuery) {
+		return null;
+	}
+
+	const possibleItemValues: string[] = [];
+
+	for (let i = 0; i <= 9; i++) {
+		const subStr1 = matchGuessDigitQuery[1] ?? "";
+		const subStr2 = matchGuessDigitQuery[2] ?? "";
+		possibleItemValues.push(`${subStr1}${i}${subStr2}`);
+	}
+
+	return (
+		<React.Fragment>
+			<div className="turtlemay__dashContentTip" key={str}>
+				Rendering all possible values for your missing digit.
+			</div>
+			{...possibleItemValues.map((v, i) => (
+				<DashResult key={`${v}#${i}`} value={v} ordinal={i} />
+			))}
+		</React.Fragment>
+	);
+}
+
+function renderMultiQuery(str: string) {
+	const splitInputs = (
+		str.split(QUERY_SEPARATOR)
+			.map(v => v.trim())
+			.filter(v => v.length > 0)
+	);
+	return (
+		<React.Fragment>
+			{splitInputs.map((v, i) => (
+				<DashResult key={`${v}#${i}`} value={v} ordinal={splitInputs.length > 1 ? i : undefined} />
+			))}
+		</React.Fragment>
+	);
 }
 
 function DashResult(props: { className?: string; value: string; ordinal?: number; }) {
