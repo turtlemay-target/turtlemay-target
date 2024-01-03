@@ -66,14 +66,7 @@ function Dashboard() {
 		function handleKey(event: KeyboardEvent) {
 			if (widgetActive && widgetElRef.current?.contains(document.activeElement)) {
 				if (event.key === RESET_KEY) {
-					if (inputValue) {
-						setInputValue("");
-						setCommitedInputValue("");
-					} else {
-						setRenderContent(null);
-					}
-					inputElRef.current?.scrollIntoView({ behavior: "smooth" });
-					inputElRef.current?.select();
+					resetInput(inputValue, inputElRef.current);
 					return;
 				}
 				if (event.key === "Escape") {
@@ -117,13 +110,7 @@ function Dashboard() {
 	}
 
 	function handleClickReset() {
-		if (inputValue) {
-			setInputValue("");
-			setCommitedInputValue("");
-		} else {
-			setRenderContent(null);
-		}
-		inputElRef.current?.focus();
+		resetInput(inputValue, inputElRef.current);
 	}
 
 	function handleClickClose() {
@@ -186,6 +173,14 @@ function Dashboard() {
 				</React.Fragment>
 			);
 		}
+	}
+
+	function resetInput(str: string, el: HTMLInputElement | null) {
+		if (!str) setRenderContent(null);
+		setInputValue("");
+		setCommitedInputValue("");
+		el?.scrollIntoView({ behavior: "smooth" });
+		el?.select();
 	}
 
 	function finishTyping() {
