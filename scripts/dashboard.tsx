@@ -66,8 +66,12 @@ function Dashboard() {
 		function handleKey(event: KeyboardEvent) {
 			if (widgetActive && widgetElRef.current?.contains(document.activeElement)) {
 				if (event.key === RESET_KEY) {
-					setInputValue("");
-					setCommitedInputValue("");
+					if (inputValue) {
+						setInputValue("");
+						setCommitedInputValue("");
+					} else {
+						setRenderContent(null);
+					}
 					inputElRef.current?.scrollIntoView({ behavior: "smooth" });
 					inputElRef.current?.select();
 					return;
@@ -86,6 +90,7 @@ function Dashboard() {
 		}
 	}, [
 		widgetActive,
+		inputValue,
 	]);
 
 	return (
@@ -112,8 +117,12 @@ function Dashboard() {
 	}
 
 	function handleClickReset() {
-		setInputValue("");
-		setCommitedInputValue("");
+		if (inputValue) {
+			setInputValue("");
+			setCommitedInputValue("");
+		} else {
+			setRenderContent(null);
+		}
 		inputElRef.current?.focus();
 	}
 
