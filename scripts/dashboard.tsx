@@ -34,10 +34,8 @@ function Dashboard() {
 	const [commitedInputValue, setCommitedInputValue] = React.useState(inputValue);
 	const [isTyping, setIsTyping] = React.useState(false);
 	const [renderContent, setRenderContent] = React.useState<JSX.Element | null>(null);
-
 	const widgetElRef = React.useRef<HTMLDivElement | null>(null);
 	const inputElRef = React.useRef<HTMLInputElement | null>(null);
-
 	const isTypingTimeout = React.useRef<number | undefined>();
 	const commitInputTimeout = React.useRef<number | undefined>();
 
